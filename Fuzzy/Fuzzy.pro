@@ -5,3 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
+HEADERS += \
+    core/expression.h \
+    core/valuemodel.h
+
