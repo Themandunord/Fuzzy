@@ -1,0 +1,4 @@
+build*/
+Fuzzy/*.pro.user
+Fuzzy/*.pro.user*
+*~
