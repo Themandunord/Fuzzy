@@ -13,19 +13,21 @@ namespace core {
         virtual T evaluate() const;
         virtual T evaluate(Expression<T>* o) const;
     private:
-        UnaryExpression* operator;
-        Expression* operand;
+        UnaryExpression* m_operator;
+        Expression* m_operand;
     };
 
     template<class T>
     UnaryExpressionModel<T>::UnaryExpressionModel(Expression<T>* _operand, UnaryExpression<T>* _operator)
+        : m_operator(_operator), m_operand(_operand)
     {
 
     }
 
     template<class T>
     UnaryExpressionModel<T>::~UnaryExpressionModel(){
-
+        delete m_operand;
+        delete m_operator;
     }
 
     template<class T>

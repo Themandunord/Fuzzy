@@ -12,27 +12,27 @@ namespace core {
         virtual T evaluate() const;
         virtual void setValue(const T* _value);
     private :
-        T* value;
+        T* m_value;
     };
 
     template<class T>
-    ValueModel<T>::ValueModel(T* _value) : value(_value){
+    ValueModel<T>::ValueModel(T* _value) : m_value(_value){
 
     }
 
     template<class T>
     ValueModel<T>::~ValueModel(){
-        delete value;
+        delete m_value;
     }
 
     template<class T>
     T ValueModel<T>::evaluate() const{
-        return *value;
+        return *m_value;
     }
 
     template<class T>
     void ValueModel<T>::setValue(const T* _value){
-            *value = *_value;
+            *m_value = *_value;
     }
 }
 
