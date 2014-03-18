@@ -30,6 +30,7 @@ Makefile*
 *.pro.user*
 Fuzzy/Fuzzy.pro.user
 Fuzzy.pro.user
+/Fuzzy/Fuzzy.pro.user
 *.qbs.user*
 *.qmlproject.user*
 *.pluginspec
