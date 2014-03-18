@@ -7,18 +7,18 @@ namespace core {
     template<class T>
     class BinaryExpressionModel : public BinaryExpression<T>{
     public :
-        BinaryExpressionModel(Expression<T>* l, Expression<T>* r, BinaryExpression<T> _operator);
+        BinaryExpressionModel(Expression<T>* l, Expression<T>* r, BinaryExpression<T>* _operator);
         virtual ~BinaryExpressionModel();
         virtual T evaluate() const;
         virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
     private:
         Expression<T>* m_r;
         Expression<T>* m_l;
-        BinaryExpression<T> m_operator;
+        BinaryExpression<T>* m_operator;
     };
 
     template<class T>
-    BinaryExpressionModel<T>::BinaryExpressionModel(Expression<T>* l, Expression<T>* r, BinaryExpression<T> _operator)
+    BinaryExpressionModel<T>::BinaryExpressionModel(Expression<T>* l, Expression<T>* r, BinaryExpression<T>* _operator)
         : m_r(r), m_l(l), m_operator(_operator)
     {
     }
@@ -37,9 +37,9 @@ namespace core {
     }
 
     template<class T>
-    BinaryExpressionModel<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
+    T BinaryExpressionModel<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
         if(m_operator != NULL)
-            return m_operator->evaluate(m_l, m_r);
+            return m_operator->evaluate(l, r);
     }
 
 }

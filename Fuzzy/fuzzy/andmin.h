@@ -5,7 +5,7 @@
 
 namespace fuzzy{
     template<class T>
-    class AndMin : And<T>{
+    class AndMin : public And<T>{
     public:
         AndMin();
         virtual ~AndMin();
@@ -23,7 +23,7 @@ namespace fuzzy{
     }
 
     template<class T>
-    T AndMin<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r){
+    T AndMin<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r)const{
         T vl = l->evaluate();
         T vr = r->evaluate();
         return (vl<vr)?vl:vl;
