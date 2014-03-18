@@ -25,7 +25,9 @@ namespace core {
 
     template<class T>
     BinaryExpressionModel<T>::~BinaryExpressionModel(){
-
+        delete m_r;
+        delete m_l;
+        delete m_operator;
     }
 
     template<class T>
