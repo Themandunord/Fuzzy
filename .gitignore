@@ -15,8 +15,8 @@
 
 /.qmake.cache
 /.qmake.stash
-*.pro.user
-*.pro.user.*
+Fuzzy/*.pro.user
+Fuzzy/*.pro.user.*
 *.moc
 moc_*.cpp
 qrc_*.cpp
