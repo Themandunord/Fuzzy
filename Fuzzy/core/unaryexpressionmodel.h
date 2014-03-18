@@ -2,7 +2,6 @@
 #define UNARYEXPRESSIONMODEL_H
 
 #include "unaryexpression.h"
-#include "expression.h"
 
 namespace core {
     template<class T>

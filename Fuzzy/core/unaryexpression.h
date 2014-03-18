@@ -1,6 +1,8 @@
 #ifndef UNARYEXPRESSION_H
 #define UNARYEXPRESSION_H
 
+#include "expression.h"
+
 namespace core {
     template<class T>
     class UnaryExpression{
