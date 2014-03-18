@@ -8,7 +8,7 @@ namespace core {
     template<class T>
     class UnaryExpressionModel : UnaryExpression<T>{
     public:
-        UnaryExpressionModel(Expression<T>* _operand, UnaryExpression<T>* _operator);
+        UnaryExpressionModel(Expression<T>* operand, UnaryExpression<T>* _operator);
         virtual ~UnaryExpressionModel();
         virtual T evaluate() const;
         virtual T evaluate(Expression<T>* o) const;
@@ -18,10 +18,9 @@ namespace core {
     };
 
     template<class T>
-    UnaryExpressionModel<T>::UnaryExpressionModel(Expression<T>* _operand, UnaryExpression<T>* _operator)
-        : m_operator(_operator), m_operand(_operand)
+    UnaryExpressionModel<T>::UnaryExpressionModel(Expression<T>* operand, UnaryExpression<T>* _operator)
+        : m_operator(_operator), m_operand(operand)
     {
-
     }
 
     template<class T>
@@ -32,12 +31,12 @@ namespace core {
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate() const{
-
+        return evaluate(m_operand);
     }
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate(Expression<T>* o) const{
-
+       return m_operator->evaluate(m_operand);
     }
 }
 

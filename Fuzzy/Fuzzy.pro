@@ -9,5 +9,7 @@ HEADERS += \
     core/expression.h \
     core/valuemodel.h \
     core/unaryexpression.h \
-    core/unaryexpressionmodel.h
+    core/unaryexpressionmodel.h \
+    core/binaryexpression.h \
+    core/binaryexpressionmodel.h
 
