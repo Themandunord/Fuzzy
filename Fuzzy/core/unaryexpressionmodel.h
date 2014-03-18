@@ -31,12 +31,14 @@ namespace core {
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate() const{
-        return evaluate(m_operand);
+        if(m_operand != null)
+           return evaluate(m_operand);
     }
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate(Expression<T>* o) const{
-       return m_operator->evaluate(m_operand);
+        if(m_operator)
+            return m_operator->evaluate(m_operand);
     }
 }
 
