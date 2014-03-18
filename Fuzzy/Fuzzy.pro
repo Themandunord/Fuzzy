@@ -7,5 +7,7 @@ SOURCES += main.cpp
 
 HEADERS += \
     core/expression.h \
-    core/valuemodel.h
+    core/valuemodel.h \
+    core/unaryexpression.h \
+    core/unaryexpressionmodel.h
 

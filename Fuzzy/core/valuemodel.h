@@ -5,7 +5,7 @@
 
 namespace core {
     template<class T>
-    class ValueModel : Expression<T> {
+    class ValueModel : public Expression<T> {
     public :
         ValueModel(T* _value);
         virtual ~ValueModel();
@@ -31,8 +31,8 @@ namespace core {
     }
 
     template<class T>
-    void ValueModel<T>::setValue(const T* value){
-
+    void ValueModel<T>::setValue(const T* _value){
+            *value = *_value;
     }
 }
 

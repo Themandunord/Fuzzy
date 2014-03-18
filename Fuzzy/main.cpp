@@ -8,6 +8,9 @@ int main()
     int nb = 5;
     core::ValueModel<int>* vm = new core::ValueModel<int>(&nb);
     cout << vm->evaluate() << endl;
+    nb = 43;
+    vm->setValue(&nb);
+    cout << vm->evaluate() << endl;
     return 0;
 }
 
