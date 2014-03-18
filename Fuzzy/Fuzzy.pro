@@ -17,5 +17,7 @@ HEADERS += \
     fuzzy/is.h \
     fuzzy/istriangle.h \
     fuzzy/or.h \
-    fuzzy/ormax.h
+    fuzzy/ormax.h \
+    fuzzy/and.h \
+    fuzzy/andmin.h
 
