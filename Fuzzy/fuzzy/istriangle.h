@@ -19,7 +19,14 @@ namespace fuzzy {
 
     template<class T>
     T IsTriangle<T>::evaluate(core::Expression<T>* o) const{
-        return 1;
+        T _value = r->evaluate();
+        if(_value <= min)
+            return 0;
+        else if(_value >= max)
+            return 0;
+        else if(_value == mid)
+            return 1;
+        return 0;
     }
 
 
