@@ -28,6 +28,8 @@ Makefile*
 
 # qtcreator generated files
 *.pro.user*
+Fuzzy/Fuzzy.pro.user
+Fuzzy.pro.user
 *.qbs.user*
 *.qmlproject.user*
 *.pluginspec
