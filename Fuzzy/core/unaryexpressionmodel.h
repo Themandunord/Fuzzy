@@ -5,7 +5,7 @@
 
 namespace core {
     template<class T>
-    class UnaryExpressionModel : UnaryExpression<T>{
+    class UnaryExpressionModel : public UnaryExpression<T>{
     public:
         UnaryExpressionModel(Expression<T>* operand, UnaryExpression<T>* _operator);
         virtual ~UnaryExpressionModel();
@@ -37,7 +37,7 @@ namespace core {
     template<class T>
     T UnaryExpressionModel<T>::evaluate(Expression<T>* o) const{
         if(m_operator != NULL)
-            return m_operator->evaluate(m_operand);
+            return m_operator->evaluate(o);
     }
 }
 

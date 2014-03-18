@@ -13,5 +13,9 @@ HEADERS += \
     core/binaryexpression.h \
     core/binaryexpressionmodel.h \
     fuzzy/not.h \
-    fuzzy/notminus1.h
+    fuzzy/notminus1.h \
+    fuzzy/is.h \
+    fuzzy/istriangle.h \
+    fuzzy/or.h \
+    fuzzy/ormax.h
 

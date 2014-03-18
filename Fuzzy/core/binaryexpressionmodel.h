@@ -5,7 +5,7 @@
 
 namespace core {
     template<class T>
-    class BinaryExpressionModel : BinaryExpression<T>{
+    class BinaryExpressionModel : public BinaryExpression<T>{
     public :
         BinaryExpressionModel(Expression<T>* l, Expression<T>* r, BinaryExpression<T> _operator);
         virtual ~BinaryExpressionModel();
