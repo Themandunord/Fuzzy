@@ -30,13 +30,13 @@ namespace core {
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate() const{
-        if(m_operand != nullptr)
+        if(m_operand != NULL)
            return evaluate(m_operand);
     }
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate(Expression<T>* o) const{
-        if(m_operator != nullptr)
+        if(m_operator != NULL)
             return m_operator->evaluate(m_operand);
     }
 }
