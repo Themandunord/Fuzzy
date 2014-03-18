@@ -106,7 +106,10 @@ compiler_clean:
 ####### Compile
 
 release/main.o: ../Fuzzy/main.cpp ../Fuzzy/core/valuemodel.h \
-		../Fuzzy/core/expression.h
+		../Fuzzy/core/expression.h \
+		../Fuzzy/fuzzy/notminus1.h \
+		../Fuzzy/fuzzy/not.h \
+		../Fuzzy/core/unaryexpression.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Fuzzy\main.cpp
 
 ####### Install

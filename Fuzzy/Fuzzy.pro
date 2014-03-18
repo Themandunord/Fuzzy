@@ -11,5 +11,7 @@ HEADERS += \
     core/unaryexpression.h \
     core/unaryexpressionmodel.h \
     core/binaryexpression.h \
-    core/binaryexpressionmodel.h
+    core/binaryexpressionmodel.h \
+    fuzzy/not.h \
+    fuzzy/notminus1.h
 
