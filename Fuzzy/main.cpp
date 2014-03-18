@@ -19,7 +19,8 @@ int main()
     cout << nm1->evaluate(vm) << endl;
 
     /* Test UnaryExpression avec NotMinus1 */
-    core::UnaryExpressionModel<float>* uem = new core::UnaryExpressionModel<float>(&vm, &nm1);
+    core::UnaryExpressionModel<float>* uem = new core::UnaryExpressionModel<float>(vm, nm1);
+    cout << uem->evaluate() << endl;
 
     return 0;
 }

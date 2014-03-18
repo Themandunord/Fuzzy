@@ -12,8 +12,8 @@ namespace core {
         virtual T evaluate() const;
         virtual T evaluate(Expression<T>* o) const;
     private:
-        UnaryExpression* m_operator;
-        Expression* m_operand;
+        UnaryExpression<T>* m_operator;
+        Expression<T>* m_operand;
     };
 
     template<class T>
@@ -30,13 +30,13 @@ namespace core {
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate() const{
-        if(m_operand != null)
+        if(m_operand != nullptr)
            return evaluate(m_operand);
     }
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate(Expression<T>* o) const{
-        if(m_operator)
+        if(m_operator != nullptr)
             return m_operator->evaluate(m_operand);
     }
 }

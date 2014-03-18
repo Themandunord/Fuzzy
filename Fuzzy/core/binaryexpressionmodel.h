@@ -32,13 +32,13 @@ namespace core {
 
     template<class T>
     T BinaryExpressionModel<T>::evaluate() const{
-        if(m_l != null && m_r != null)
+        if(m_l != NULL && m_r != NULL)
             return evaluate(m_l, m_r);
     }
 
     template<class T>
     BinaryExpressionModel<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
-        if(m_operator != null)
+        if(m_operator != NULL)
             return m_operator->evaluate(m_l, m_r);
     }
 
