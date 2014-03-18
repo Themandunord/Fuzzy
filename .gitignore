@@ -30,6 +30,17 @@ Makefile*
 
 *.autosave
 
+# qtcreator generated files
+*.pro.user*
+*.qbs.user*
+*.qmlproject.user*
+*.pluginspec
+*.json
+/src/app/Info.plist
+app_version.h
+/src/plugins/coreplugin/ide_version.h
+/share/qtcreator/externaltools
+
 # Perso
 *~
 build-Fuzzy-Desktop_Qt_5_2_1_MinGW_32bit-Debug/
