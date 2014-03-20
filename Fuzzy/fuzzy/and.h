@@ -7,6 +7,7 @@ namespace fuzzy{
     template<class T>
     class And : public core::BinaryExpression<T>{
     public:
+        virtual ~And(){}
         virtual T evaluate(core::Expression<T>* l,core::Expression<T>* r) const = 0;
     };
 

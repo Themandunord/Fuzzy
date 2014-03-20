@@ -2,6 +2,7 @@
 #define BINARYEXPRESSIONMODEL_H
 
 #include "binaryexpression.h"
+#include <iostream>
 
 namespace core {
     template<class T>
@@ -21,13 +22,11 @@ namespace core {
     BinaryExpressionModel<T>::BinaryExpressionModel(Expression<T>* l, Expression<T>* r, BinaryExpression<T>* _operator)
         : m_r(r), m_l(l), m_operator(_operator)
     {
+
     }
 
     template<class T>
     BinaryExpressionModel<T>::~BinaryExpressionModel(){
-        delete m_r;
-        delete m_l;
-        delete m_operator;
     }
 
     template<class T>

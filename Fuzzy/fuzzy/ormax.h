@@ -1,12 +1,15 @@
 #ifndef ORMAX_H
 #define ORMAX_H
 
+#include "or.h"
+
 namespace fuzzy {
     template<class T>
     class OrMax : public Or<T>{
     public:
        OrMax();
-       virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
+       virtual ~OrMax(){}
+       virtual T evaluate(core::Expression<T>* l, core::Expression<T>* r) const;
     };
 
     template<class T>
@@ -15,8 +18,10 @@ namespace fuzzy {
     }
 
     template<class T>
-    T OrMax<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
-        return 1;
+    T OrMax<T>::evaluate(core::Expression<T>* l, core::Expression<T>* r) const{
+        T _l = l->evaluate();
+        T _r = r->evaluate();
+        return (_l < _r)?_r:_l;
     }
 }
 
