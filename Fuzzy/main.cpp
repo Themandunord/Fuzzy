@@ -7,6 +7,8 @@
 #include "fuzzy/thenmin.h"
 #include "fuzzy/thenmult.h"
 #include "fuzzy/istriangle.h"
+#include "fuzzy/aggmax.h"
+#include "fuzzy/aggplus.h"
 #include "core/unaryexpressionmodel.h"
 #include "core/binaryexpressionmodel.h"
 
@@ -36,35 +38,45 @@ int main()
     core::ValueModel<float> vml (0.5f);
     core::ValueModel<float> vmr (0.4f);
 
-    /* Text BinaryExpression avec AndMin */
+    /* Test BinaryExpression avec AndMin */
     fuzzy::AndMin<float> am;
     core::BinaryExpressionModel<float> bem1(&vml,&vmr,&am);
     cout << "AndMin : " << bem1.evaluate() << endl;
 
-    /* Text BinaryExpression avec OrMax */
+    /* Test BinaryExpression avec OrMax */
     fuzzy::OrMax<float> om;
     core::BinaryExpressionModel<float> bem2(&vml,&vmr,&om);
     cout << "OrMax : " << bem2.evaluate() << endl;
 
-    /* Text BinaryExpression avec OrPlus */
+    /* Test BinaryExpression avec OrPlus */
     fuzzy::OrPlus<float> op;
     core::BinaryExpressionModel<float> bem3(&vml,&vmr,&op);
     cout << "OrPlus : " << bem3.evaluate() << endl;
 
-    /* Text BinaryExpression avec ThenMin */
+    /* Test BinaryExpression avec ThenMin */
     fuzzy::ThenMin<float> tm;
     core::BinaryExpressionModel<float> bem4(&vml,&vmr,&tm);
     cout << "ThenMin : " << bem4.evaluate() << endl;
 
-    /* Text BinaryExpression avec ThenMult */
+    /* Test BinaryExpression avec ThenMult */
     fuzzy::ThenMult<float> tml;
     core::BinaryExpressionModel<float> bem5(&vml,&vmr,&tml);
     cout << "ThenMult : " << bem5.evaluate() << endl;
 
-    /* Text BinaryExpression avec AndMult */
+    /* Test BinaryExpression avec AndMult */
     fuzzy::ThenMult<float> aml;
     core::BinaryExpressionModel<float> bem6(&vml,&vmr,&aml);
     cout << "AndMult : " << bem6.evaluate() << endl;
+
+    /* Test BinaryExpression avec AggMax */
+    fuzzy::AggMax<float> agm;
+    core::BinaryExpressionModel<float> bem7(&vml,&vmr,&agm);
+    cout << "AggMax : " << bem7.evaluate() << endl;
+
+    /* Test BinaryExpression avec AggPlus */
+    fuzzy::AggPlus<float> agp;
+    core::BinaryExpressionModel<float> bem8(&vml,&vmr,&agp);
+    cout << "AggPlus : " << bem8.evaluate() << endl;
 
     return 0;
 }
