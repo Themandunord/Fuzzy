@@ -19,5 +19,13 @@ HEADERS += \
     fuzzy/or.h \
     fuzzy/ormax.h \
     fuzzy/and.h \
-    fuzzy/andmin.h
+    fuzzy/andmin.h \
+    fuzzy/thenmult.h \
+    fuzzy/thenmin.h \
+    fuzzy/then.h \
+    fuzzy/orplus.h \
+    fuzzy/andmult.h \
+    fuzzy/aggplus.h \
+    fuzzy/aggmax.h \
+    fuzzy/agg.h
 
