@@ -11,6 +11,7 @@
 #include "fuzzy/aggplus.h"
 #include "core/unaryexpressionmodel.h"
 #include "core/binaryexpressionmodel.h"
+#include "core/shapeview.h"
 
 using namespace std;
 
@@ -77,6 +78,11 @@ int main()
     fuzzy::AggPlus<float> agp;
     core::BinaryExpressionModel<float> bem8(&vml,&vmr,&agp);
     cout << "AggPlus : " << bem8.evaluate() << endl;
+
+    /*ShapeView*/
+    fuzzy::IsTriangle<float> itView(0,5,10);
+    core::ValueModel<float> vmView(0.0f);
+    core::ShapeView<float> sv (&vmView, &itView);
 
     return 0;
 }
