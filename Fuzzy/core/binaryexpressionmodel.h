@@ -3,6 +3,7 @@
 
 #include "binaryexpression.h"
 #include "expression.h"
+#include "nullexpressionexception.h"
 #include <iostream>
 
 namespace core {
@@ -41,14 +42,14 @@ namespace core {
 
     template<class T>
     T BinaryExpressionModel<T>::evaluate() const{
-        if(m_l != NULL && m_r != NULL)
-            return evaluate(m_l, m_r);
+        if(m_l == NULL || m_r == NULL) throw NullExpressionException("Null operand expression !");
+        return evaluate(m_l, m_r);
     }
 
     template<class T>
     T BinaryExpressionModel<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
-        if(m_operator != NULL)
-            return m_operator->evaluate(l, r);
+        if(m_operator == NULL) throw NullExpressionException("Null operator expression !");
+        return m_operator->evaluate(l, r);
     }
 
     template<class T>
