@@ -80,9 +80,12 @@ int main()
     cout << "AggPlus : " << bem8.evaluate() << endl;
 
     /*ShapeView*/
+    cout << "ShapeView : Triangle" << endl;
     fuzzy::IsTriangle<float> itView(0,5,10);
     core::ValueModel<float> vmView(0.0f);
-    core::ShapeView<float> sv (&vmView, &itView);
+    core::ShapeView<float> sv (&vmView, &itView,0,10,1);
+    sv.process();
+    sv.print();
 
     /* Text NullExpressionException */
     core::BinaryExpressionModel<float> bem9(NULL,&vmr,&agp);
