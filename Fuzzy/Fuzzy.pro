@@ -34,6 +34,6 @@ HEADERS += \
     fuzzy/istrapeze.h \
     fuzzy/istrapezeleft.h \
     fuzzy/istrapezeright.h \
-    fuzzy/isball.h \
-    core/shapeview.h
+    core/shapeview.h \
+    fuzzy/isbell.h
 

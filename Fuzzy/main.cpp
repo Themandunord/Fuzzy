@@ -7,6 +7,11 @@
 #include "fuzzy/thenmin.h"
 #include "fuzzy/thenmult.h"
 #include "fuzzy/istriangle.h"
+#include "fuzzy/istrapeze.h"
+#include "fuzzy/istrapezeleft.h"
+#include "fuzzy/istrapezeright.h"
+#include "fuzzy/isgaussian.h"
+#include "fuzzy/isbell.h"
 #include "fuzzy/aggmax.h"
 #include "fuzzy/aggplus.h"
 #include "core/unaryexpressionmodel.h"
@@ -82,10 +87,39 @@ int main()
     /*ShapeView*/
     cout << "ShapeView : Triangle" << endl;
     fuzzy::IsTriangle<float> itView(0,5,10);
-    core::ValueModel<float> vmView(0.0f);
-    core::ShapeView<float> sv (&itView,0,10,1);
-    sv.process();
-    sv.print();
+    core::ShapeView<float> sv1 (&itView,0,10,1);
+    sv1.process();
+    sv1.print();
+
+    cout << "ShapeView : Trapeze" << endl;
+    fuzzy::IsTrapeze<float> itzView(0,3,6,10);
+    core::ShapeView<float> sv2 (&itzView,0,10,1);
+    sv2.process();
+    sv2.print();
+
+    cout << "ShapeView : TrapezeLeft" << endl;
+    fuzzy::IsTrapezeLeft<float> itzlView(5,10);
+    core::ShapeView<float> sv3 (&itzlView,0,10,1);
+    sv3.process();
+    sv3.print();
+
+    cout << "ShapeView : TrapezeRight" << endl;
+    fuzzy::IsTrapezeRight<float> itzrView(0,5);
+    core::ShapeView<float> sv4 (&itzrView,0,10,1);
+    sv4.process();
+    sv4.print();
+
+    cout << "ShapeView : Gaussian" << endl;
+    fuzzy::IsGaussian<float> igView(5,1);
+    core::ShapeView<float> sv5 (&igView,0,10,1);
+    sv5.process();
+    sv5.print();
+
+    cout << "ShapeView : Bell" << endl;
+    fuzzy::IsBell<float> ibView(2,4,6);
+    core::ShapeView<float> sv6 (&ibView,0,10,1);
+    sv6.process();
+    sv6.print();
 
     /* Text NullExpressionException */
     core::BinaryExpressionModel<float> bem9(NULL,&vmr,&agp);

@@ -21,11 +21,11 @@ namespace core {
         virtual void process();
         virtual void print();
     private:
-        std::pair<std::vector<T>*,std::vector<T>* >* m_content;
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
-        float m_delta;
-        T m_min, m_max;
+        std::pair<std::vector<T>*,std::vector<T>* >* m_content;
+        T m_min, m_max, m_delta;
+
 
     };
 
@@ -40,7 +40,10 @@ namespace core {
 
     template<class T>
     ShapeView<T>::~ShapeView(){
-        delete m_model;
+        delete m_content;
+        //delete m_model;
+
+        delete m_value;
     }
 
     template<class T>
@@ -60,7 +63,7 @@ namespace core {
 
     template<class T>
     void ShapeView<T>::process(){
-        for(float i = m_min; i < m_max; i+=m_delta){
+        for(float i = m_min; i <= m_max; i+=m_delta){
             addFirst(i);
             m_value->setValue(i);
             T result = m_model->evaluate();
