@@ -29,13 +29,10 @@ HEADERS += \
     fuzzy/aggplus.h \
     fuzzy/aggmax.h \
     fuzzy/agg.h \
-<<<<<<< HEAD
-    core/nullexpressionexception.h
-=======
+    core/nullexpressionexception.h \
     fuzzy/isgaussian.h \
     fuzzy/istrapeze.h \
     fuzzy/istrapezeleft.h \
     fuzzy/istrapezeright.h \
     fuzzy/isball.h
->>>>>>> 9c8d1eb243bae41ecd4e88f5b93ab3513856f3db
 
