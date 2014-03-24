@@ -1,7 +1,7 @@
 #ifndef AND_H
 #define AND_H
 
-#include "core/binaryexpression.h"
+#include "../core/binaryexpression.h"
 
 namespace fuzzy{
     template<class T>
