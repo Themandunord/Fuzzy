@@ -78,6 +78,27 @@ int main()
     core::BinaryExpressionModel<float> bem8(&vml,&vmr,&agp);
     cout << "AggPlus : " << bem8.evaluate() << endl;
 
+    /* Text NullExpressionException */
+    core::BinaryExpressionModel<float> bem9(NULL,&vmr,&agp);
+    try
+    {
+        cout << "BinaryExpressionModel (Exception) : " << bem9.evaluate() << endl;
+    }
+    catch(std::exception& e)
+    {
+        cout << "Exception : " << e.what() << endl;
+    }
+
+    core::UnaryExpressionModel<float> uem3(&vm, NULL);
+    try
+    {
+        cout << "UnaryExpressionModel (Exception) : " << uem3.evaluate() << endl;
+    }
+    catch(std::exception& e)
+    {
+        cout << "Exception : " << e.what() << endl;
+    }
+
     return 0;
 }
 

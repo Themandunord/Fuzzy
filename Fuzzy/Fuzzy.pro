@@ -3,7 +3,8 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    core/nullexpressionexception.cpp
 
 HEADERS += \
     core/expression.h \
@@ -27,5 +28,6 @@ HEADERS += \
     fuzzy/andmult.h \
     fuzzy/aggplus.h \
     fuzzy/aggmax.h \
-    fuzzy/agg.h
+    fuzzy/agg.h \
+    core/nullexpressionexception.h
 

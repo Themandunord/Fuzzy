@@ -3,6 +3,7 @@
 
 #include "unaryexpression.h"
 #include "expression.h"
+#include "nullexpressionexception.h"
 
 namespace core {
     template<class T>
@@ -38,15 +39,14 @@ namespace core {
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate() const{
-        //@TODO throw exception
-        if(m_operand != NULL)
-           return evaluate(m_operand);
+        if(m_operand == NULL) throw NullExpressionException("Null operand exception !");
+        return evaluate(m_operand);
     }
 
     template<class T>
     T UnaryExpressionModel<T>::evaluate(Expression<T>* o) const{
-        if(m_operator != NULL)
-            return m_operator->evaluate(o);
+        if(m_operator == NULL) throw NullExpressionException("Null operator expression !");
+        return m_operator->evaluate(o);
     }
 
     template<class T>
