@@ -2,10 +2,11 @@
 #define UNARYEXPRESSIONMODEL_H
 
 #include "unaryexpression.h"
+#include "expression.h"
 
 namespace core {
     template<class T>
-    class UnaryExpressionModel : public UnaryExpression<T>{
+    class UnaryExpressionModel : public Expression<T>, public UnaryExpression<T>{
     public:
         UnaryExpressionModel(Expression<T>* operand = NULL, UnaryExpression<T>* _operator = NULL);
         virtual ~UnaryExpressionModel();
@@ -55,19 +56,19 @@ namespace core {
     }
 
     template<class T>
-    void UnaryExpressionModel<T>::setOperator(Expression<T>* op)
+    void UnaryExpressionModel<T>::setOperator(UnaryExpression<T>* op)
     {
         m_operator=op;
     }
 
     template<class T>
-    Expression<core::T> *UnaryExpressionModel::getOperand() const
+    Expression<T> *UnaryExpressionModel<T>::getOperand() const
     {
         return m_operand;
     }
 
     template<class T>
-    UnaryExpression<core::T> *UnaryExpressionModel::getOperator() const
+    UnaryExpression<T> *UnaryExpressionModel<T>::getOperator() const
     {
         return m_operator;
     }

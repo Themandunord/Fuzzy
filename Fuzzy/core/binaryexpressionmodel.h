@@ -57,12 +57,12 @@ namespace core {
     }
 
     template<class T>
-    void ExpressionModel<T>::setLeft(Expression<T>* _l){
+    void BinaryExpressionModel<T>::setLeft(Expression<T>* _l){
         m_l = _l;
     }
 
     template<class T>
-    void ExpressionModel<T>::setRight(Expression<T>* _l){
+    void BinaryExpressionModel<T>::setRight(Expression<T>* _r){
         m_r = _r;
     }
 
