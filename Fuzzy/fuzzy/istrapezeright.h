@@ -1,0 +1,4 @@
+#ifndef ISTRAPEZERIGHT_H
+#define ISTRAPEZERIGHT_H
+
+#endif // ISTRAPEZERIGHT_H

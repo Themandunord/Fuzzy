@@ -27,5 +27,10 @@ HEADERS += \
     fuzzy/andmult.h \
     fuzzy/aggplus.h \
     fuzzy/aggmax.h \
-    fuzzy/agg.h
+    fuzzy/agg.h \
+    fuzzy/isgaussian.h \
+    fuzzy/istrapeze.h \
+    fuzzy/istrapezeleft.h \
+    fuzzy/istrapezeright.h \
+    fuzzy/isball.h
 
