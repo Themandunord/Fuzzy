@@ -1,7 +1,7 @@
 #ifndef THEN_H
 #define THEN_H
 
-#include "core/binaryexpression.h"
+#include "../core/binaryexpression.h"
 
 namespace fuzzy {
     template<class T>

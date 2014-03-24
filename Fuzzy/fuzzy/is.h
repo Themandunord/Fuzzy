@@ -1,7 +1,7 @@
 #ifndef IS_H
 #define IS_H
 
-#include "core/unaryexpression.h"
+#include "../core/unaryexpression.h"
 
 namespace fuzzy {
     template<class T>

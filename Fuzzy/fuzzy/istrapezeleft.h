@@ -1,0 +1,4 @@
+#ifndef ISTRAPEZELEFT_H
+#define ISTRAPEZELEFT_H
+
+#endif // ISTRAPEZELEFT_H
