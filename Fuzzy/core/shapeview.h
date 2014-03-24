@@ -10,7 +10,7 @@ namespace core {
     template<class T>
     class ShapeView{
     public:
-        ShapeView(ValueModel<T>* v,UnaryExpression<T>* e, float _min, float _max, float _delta);
+        ShapeView(UnaryExpression<T>* e, T _min, T _max, T _delta);
         virtual ~ShapeView();
 
         virtual std::pair<std::vector<T>*,std::vector<T>* >* getPair() const;
@@ -25,13 +25,13 @@ namespace core {
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
         float m_delta;
-        float m_min, m_max;
+        T m_min, m_max;
 
     };
 
     template<class T>
-    ShapeView<T>::ShapeView(ValueModel<T>* v, UnaryExpression<T>* e, float _min, float _max, float _delta)
-        : m_value(v), m_model(new UnaryExpressionModel<T>(v,e)),
+    ShapeView<T>::ShapeView(UnaryExpression<T>* e, T _min, T _max, T _delta)
+        : m_value(new ValueModel<T>(_min)), m_model(new UnaryExpressionModel<T>(m_value,e)),
           m_content(new std::pair<std::vector<T>*,std::vector<T>* >(new std::vector<T>(), new std::vector<T>())),
           m_min(_min), m_max(_max), m_delta(_delta)
     {
@@ -63,7 +63,7 @@ namespace core {
         for(float i = m_min; i < m_max; i+=m_delta){
             addFirst(i);
             m_value->setValue(i);
-            float result = m_model->evaluate();
+            T result = m_model->evaluate();
             addSecond(result);
         }
     }
