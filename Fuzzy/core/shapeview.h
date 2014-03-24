@@ -21,9 +21,10 @@ namespace core {
 
     template<class T>
     ShapeView<T>::ShapeView(ValueModel<T>* v, UnaryExpression<T>* e)
-        : m_value(v), m_model(new UnaryExpressionModel<T>(v,e))
+        : m_value(v), m_model(new UnaryExpressionModel<T>(v,e)),
+          m_content(new std::pair<std::vector<T>*,std::vector<T>* >(new std::vector<T>(), new std::vector<T>()))
     {
-        m_content = new std::pair<std::vector<T>*,std::vector<T>* >(new std::vector<T>(), new std::vector<T>());
+
     }
 
     template<class T>

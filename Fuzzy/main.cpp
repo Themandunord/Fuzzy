@@ -79,12 +79,11 @@ int main()
     core::BinaryExpressionModel<float> bem8(&vml,&vmr,&agp);
     cout << "AggPlus : " << bem8.evaluate() << endl;
 
-<<<<<<< HEAD
     /*ShapeView*/
     fuzzy::IsTriangle<float> itView(0,5,10);
     core::ValueModel<float> vmView(0.0f);
     core::ShapeView<float> sv (&vmView, &itView);
-=======
+
     /* Text NullExpressionException */
     core::BinaryExpressionModel<float> bem9(NULL,&vmr,&agp);
     try
@@ -105,7 +104,6 @@ int main()
     {
         cout << "Exception : " << e.what() << endl;
     }
->>>>>>> 2a1442d7ac1d8cbf3686bf39d129dc6c9361ea61
 
     return 0;
 }
