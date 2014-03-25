@@ -7,9 +7,9 @@
 
 namespace core {
     template<class T>
-    class BinaryShadowExpression : public UnaryExpression<T>{
+    class BinaryShadowExpression : public BinaryExpression<T>{
       public:
-        BinaryShadowExpression(UnaryExpression<T>* e = NULL);
+        BinaryShadowExpression(BinaryExpression<T>* e = NULL);
         virtual ~BinaryShadowExpression(){}
         virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
       private:
@@ -24,7 +24,7 @@ namespace core {
     }
 
     template<class T>
-    T UnaryShadowExpression<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
+    T BinaryShadowExpression<T>::evaluate(Expression<T>* l, Expression<T>* r) const{
         if(m_exp == NULL)
             throw NullExpressionException("Null operand expression !");
         return m_exp->evaluate(l,r);

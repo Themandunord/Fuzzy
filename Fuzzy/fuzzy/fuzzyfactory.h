@@ -3,6 +3,8 @@
 
 #include "../core/expressionfactory.h"
 #include "../core/expression.h"
+#include "../core/unaryshadowexpression.h"
+#include "../core/binaryshadowexpression.h"
 #include "and.h"
 #include "andmin.h"
 #include "or.h"
@@ -23,8 +25,7 @@ namespace fuzzy{
     class FuzzyFactory : public core::ExpressionFactory
     {
     public:
-        FuzzyFactory();
-        FuzzyFactory(And* _and, Or* _or, Then* _then, Agg* _agg, Not* _not);
+        FuzzyFactory(const And &_and, const Or &_or, const Then &_then, const Agg &_agg, const Not &_not);
         virtual ~FuzzyFactory();
 
         core::Expression<T> newAnd(core::Expression<T> l,core::Expression<T> r);
@@ -35,26 +36,18 @@ namespace fuzzy{
         core::Expression<T> newIs(Is s,core::Expression<T> o);
 
     protected:
-        And* m_and;
-        Or* m_or;
-        Then* m_then;
-        Agg* m_agg;
+        core::BinaryShadowExpression* m_and;
+        core::BinaryShadowExpression* m_or;
+        core::BinaryShadowExpression* m_then;
+        core::BinaryShadowExpression* m_agg;
         //Defuzz m_defuzz;
-        Not* m_not;
+        core::UnaryShadowExpression* m_not;
     };
 
     template< class T >
-    FuzzyFactory<T>::FuzzyFactory()
-        : m_and(new AndMin()),m_or(new OrMax()),m_then(new ThenMin()),
-          m_agg(new AggMax()),m_not(new NotMinus1())
-    {
-
-    }
-
-    template< class T >
-    FuzzyFactory<T>::FuzzyFactory(And* _and, Or* _or, Then* _then, Agg* _agg, Not* _not)
-        : m_and(_and),m_or(_or),m_then(_then),
-          m_agg(_agg),m_not(_not)
+    FuzzyFactory<T>::FuzzyFactory(const And& _and, const Or& _or, const Then& _then, const Agg& _agg, const Not& _not)
+        : m_and(&_and),m_or(&_or),m_then(&_then),
+          m_agg(&_agg),m_not(&_not)
     {
 
     }
