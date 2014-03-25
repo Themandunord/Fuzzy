@@ -13,11 +13,11 @@ namespace core {
         virtual ~BinaryShadowExpression(){}
         virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
       private:
-        Expression<T>* m_exp;
+        BinaryExpression<T>* m_exp;
     };
 
     template<class T>
-    UnaryShadowExpression<T>::UnaryShadowExpression(UnaryExpression<T>* e = NULL)
+    BinaryShadowExpression<T>::BinaryShadowExpression(BinaryExpression<T>* e = NULL)
         : m_exp(e)
     {
 

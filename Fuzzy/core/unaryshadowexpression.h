@@ -13,7 +13,7 @@ namespace core {
         virtual ~UnaryShadowExpression(){}
         virtual T evaluate(Expression<T>* o) const;
       private:
-        Expression<T>* m_exp;
+        UnaryExpression<T>* m_exp;
     };
 
     template<class T>
