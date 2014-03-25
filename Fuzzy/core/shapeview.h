@@ -24,7 +24,7 @@ namespace core {
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
         std::pair<std::vector<T>*,std::vector<T>* >* m_content;
-        std::vector<T>* m_x,m_y;
+        std::vector<T> *m_x, *m_y;
         T m_min, m_max, m_step;
 
 
