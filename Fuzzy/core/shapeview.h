@@ -46,7 +46,7 @@ namespace core {
         delete m_value;
         delete m_x;
         delete m_y;
-        //delete m_model;
+        delete m_model;
 
     }
 
