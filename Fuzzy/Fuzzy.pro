@@ -37,5 +37,7 @@ HEADERS += \
     core/shapeview.h \
     fuzzy/isbell.h \
     core/expressionfactory.h \
-    fuzzy/fuzzyfactory.h
+    fuzzy/fuzzyfactory.h \
+    core/unaryshadowexpression.h \
+    core/binaryshadowexpression.h
 
