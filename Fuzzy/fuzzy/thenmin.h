@@ -5,7 +5,7 @@
 
 namespace fuzzy {
     template<class T>
-    class ThenMin : public Or<T>{
+    class ThenMin : public Then<T>{
     public:
         ThenMin();
         virtual ~ThenMin(){}

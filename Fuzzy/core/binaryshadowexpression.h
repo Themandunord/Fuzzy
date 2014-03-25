@@ -9,15 +9,15 @@ namespace core {
     template<class T>
     class BinaryShadowExpression : public BinaryExpression<T>{
       public:
-        BinaryShadowExpression(BinaryExpression<T>* e = NULL);
+        BinaryShadowExpression(const BinaryExpression<T>* e = NULL);
         virtual ~BinaryShadowExpression(){}
         virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
       private:
-        BinaryExpression<T>* m_exp;
+        const BinaryExpression<T>* m_exp;
     };
 
     template<class T>
-    BinaryShadowExpression<T>::BinaryShadowExpression(BinaryExpression<T>* e)
+    BinaryShadowExpression<T>::BinaryShadowExpression(const BinaryExpression<T>* e)
         : m_exp(e)
     {
 

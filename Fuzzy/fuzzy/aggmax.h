@@ -5,7 +5,7 @@
 
 namespace fuzzy {
     template<class T>
-    class AggMax : public Or<T>{
+    class AggMax : public Agg<T>{
     public:
        AggMax();
        virtual ~AggMax(){}

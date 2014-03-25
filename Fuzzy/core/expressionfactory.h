@@ -14,6 +14,7 @@ namespace core {
     public:
         ExpressionFactory();
         virtual ~ExpressionFactory();
+        // à mettre en protected plutôt?
         virtual Expression<T>* hold(Expression<T>*);
         virtual Expression<T>* newUnary(UnaryExpression<T>*, Expression<T>*);
         virtual Expression<T>* newBinary(BinaryExpression<T>*, Expression<T>*, Expression<T>*);
