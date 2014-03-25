@@ -17,6 +17,7 @@
 #include "core/unaryexpressionmodel.h"
 #include "core/binaryexpressionmodel.h"
 #include "core/shapeview.h"
+#include "core/expressionfactory.h"
 
 using namespace std;
 
@@ -141,6 +142,9 @@ int main()
     {
         cout << "Exception : " << e.what() << endl;
     }
+
+    core::ExpressionFactory<float> efactory;
+    cout << efactory.newUnary(&ibView,&vm)->evaluate() << endl;
 
     return 0;
 }
