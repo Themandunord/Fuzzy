@@ -42,6 +42,8 @@ namespace core {
     ShapeView<T>::~ShapeView(){
         delete m_content;
         delete m_value;
+        delete m_x;
+        delete m_y;
         //delete m_model;
 
     }
