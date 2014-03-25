@@ -20,6 +20,9 @@ namespace core {
 
         virtual void process();
         virtual void print();
+        virtual void run();
+
+        virtual void setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
     private:
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
@@ -82,6 +85,27 @@ namespace core {
             std::cout << "[ " << *itFirst << ", " << *itSecond << " ]" << std::endl;
             ++itSecond;
         }
+    }
+
+    template<class T>
+    void ShapeView<T>::setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step){
+        m_min = _min;
+        m_max = _max;
+        m_step = _step;
+        delete m_model;
+        delete m_x;
+        delete m_y;
+        delete m_content;
+        m_model = new UnaryExpressionModel<T>(m_value,e);
+        m_x = new std::vector<T>();
+        m_y = new std::vector<T>();
+        m_content = new std::pair<std::vector<T>*,std::vector<T>* >(m_x,m_y);
+    }
+
+    template<class T>
+    void ShapeView<T>::run(){
+        process();
+        print();
     }
 }
 
