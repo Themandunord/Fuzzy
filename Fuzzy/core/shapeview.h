@@ -10,7 +10,7 @@ namespace core {
     template<class T>
     class ShapeView{
     public:
-        ShapeView(UnaryExpression<T>* e, T _min, T _max, T _delta);
+        ShapeView(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
         virtual ~ShapeView();
 
         virtual std::pair<std::vector<T>*,std::vector<T>* >* getPair() const;
@@ -24,16 +24,16 @@ namespace core {
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
         std::pair<std::vector<T>*,std::vector<T>* >* m_content;
-        T m_min, m_max, m_delta;
+        T m_min, m_max, m_step;
 
 
     };
 
     template<class T>
-    ShapeView<T>::ShapeView(UnaryExpression<T>* e, T _min, T _max, T _delta)
+    ShapeView<T>::ShapeView(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step)
         : m_value(new ValueModel<T>(_min)), m_model(new UnaryExpressionModel<T>(m_value,e)),
           m_content(new std::pair<std::vector<T>*,std::vector<T>* >(new std::vector<T>(), new std::vector<T>())),
-          m_min(_min), m_max(_max), m_delta(_delta)
+          m_min(_min), m_max(_max), m_step(_step)
     {
 
     }
@@ -41,9 +41,9 @@ namespace core {
     template<class T>
     ShapeView<T>::~ShapeView(){
         delete m_content;
+        delete m_value;
         //delete m_model;
 
-        delete m_value;
     }
 
     template<class T>
@@ -63,7 +63,7 @@ namespace core {
 
     template<class T>
     void ShapeView<T>::process(){
-        for(float i = m_min; i <= m_max; i+=m_delta){
+        for(float i = m_min; i <= m_max; i+=m_step){
             addFirst(i);
             m_value->setValue(i);
             T result = m_model->evaluate();
