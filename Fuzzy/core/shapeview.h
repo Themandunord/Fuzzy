@@ -24,6 +24,7 @@ namespace core {
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
         std::pair<std::vector<T>*,std::vector<T>* >* m_content;
+        std::vector<T>* m_x,m_y;
         T m_min, m_max, m_step;
 
 
@@ -32,7 +33,8 @@ namespace core {
     template<class T>
     ShapeView<T>::ShapeView(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step)
         : m_value(new ValueModel<T>(_min)), m_model(new UnaryExpressionModel<T>(m_value,e)),
-          m_content(new std::pair<std::vector<T>*,std::vector<T>* >(new std::vector<T>(), new std::vector<T>())),
+          m_x(new std::vector<T>()),m_y(new std::vector<T>()),
+          m_content(new std::pair<std::vector<T>*,std::vector<T>* >(m_x,m_y)),
           m_min(_min), m_max(_max), m_step(_step)
     {
 
