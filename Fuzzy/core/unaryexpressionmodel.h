@@ -33,8 +33,6 @@ namespace core {
 
     template<class T>
     UnaryExpressionModel<T>::~UnaryExpressionModel(){
-        delete m_operand;
-        delete m_operator;
     }
 
     template<class T>
