@@ -17,7 +17,7 @@ namespace core {
     };
 
     template<class T>
-    UnaryShadowExpression<T>::UnaryShadowExpression(UnaryExpression<T>* e = NULL)
+    UnaryShadowExpression<T>::UnaryShadowExpression(UnaryExpression<T>* e)
         : m_exp(e)
     {
 

@@ -14,6 +14,7 @@
 #include "fuzzy/isbell.h"
 #include "fuzzy/aggmax.h"
 #include "fuzzy/aggplus.h"
+#include "fuzzy/fuzzyfactory.h"
 #include "core/unaryexpressionmodel.h"
 #include "core/binaryexpressionmodel.h"
 #include "core/shapeview.h"
@@ -145,6 +146,14 @@ int main()
 
     core::ExpressionFactory<float> efactory;
     cout << efactory.newUnary(&ibView,&vm)->evaluate() << endl;
+
+    fuzzy::FuzzyFactory<float> fFactory(&am,&om,&tm,&agm,&nm1);
+    cout << "AndMin via factory : " << fFactory.newAnd(&vml,&vmr);
+    cout << "OrMax via factory : " << fFactory.newOr(&vml,&vmr);
+    cout << "ThenMin via factory : " << fFactory.newThen(&vml,&vmr);
+    cout << "AggMax via factory : " << fFactory.newAgg(&vml,&vmr);
+    cout << "NotMinus1 via factory : " << fFactory.newNot(&vm);
+    cout << "IsTriangle via factory : " << fFactory.newIs(&it,&vm);
 
     return 0;
 }

@@ -17,7 +17,7 @@ namespace core {
     };
 
     template<class T>
-    BinaryShadowExpression<T>::BinaryShadowExpression(BinaryExpression<T>* e = NULL)
+    BinaryShadowExpression<T>::BinaryShadowExpression(BinaryExpression<T>* e)
         : m_exp(e)
     {
 
