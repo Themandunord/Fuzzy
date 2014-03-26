@@ -20,7 +20,7 @@ int main2(){
     fuzzy::OrMax<float> opOr;
     fuzzy::ThenMin<float> opThen;
     fuzzy::AggMax<float> opAgg;
-    fuzzy::CogDefuzz<float> opCog(0,10,1);
+    fuzzy::CogDefuzz<float> opCog(0,25,1);
 
     fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot,opCog);
 
@@ -55,7 +55,7 @@ int main2(){
      );
 
     cout << r->evaluate() << endl;
-
+    service.setValue(2);
     cout << "CogDefuzz via factory : " << f.newMamdani(&tips,r)->evaluate() << endl;
 
 
