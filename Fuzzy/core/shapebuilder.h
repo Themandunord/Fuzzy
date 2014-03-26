@@ -17,7 +17,7 @@ namespace core
 
         virtual ~ShapeBuilder(){}
         static ShapeBuilder<T> &getInstance();
-        Shape& buildShape(ValueModel<T>* vm, Expression<T>* e,T min, T max, T step) const;
+        Shape& buildShape(ValueModel<T>* vm, Expression<T>* e,const T& min, const T& max, const T& step);
         Shape& getShape() const;
 
     private:
@@ -36,7 +36,7 @@ namespace core
     }
 
     template<class T>
-    Shape& ShapeBuilder<T>::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step) const
+    typename ShapeBuilder<T>::Shape& ShapeBuilder<T>::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step)
     {
         std::vector<T> x;
         std::vector<T> y;
@@ -48,32 +48,34 @@ namespace core
             y.push_back(e->evaluate());
         }
 
-        Shape pair(x,y);
+        ShapeBuilder<T>::Shape pair(x,y);
         m_shape=&pair;
-        return pair;
+        return *m_shape;
     }
 
     template<class T>
-    Shape& ShapeBuilder<T>::getShape() const
+    typename ShapeBuilder<T>::Shape& ShapeBuilder<T>::getShape() const
     {
         if(m_shape == NULL) throw "Null Shape !";
         return *m_shape;
     }
 
-    template<class T>
-    std::ostream& operator<<(std::ostream& os, const ShapeBuilder::Shape& s)
-    {
-        os << "[";
-        for(typename std::vector<T>::const_iterator itx=s.first.begin();itx!=s.first.end();itx++)
-            os << *itx << ", ";
-        os << "]" << std::endl << "[";
-        for(typename std::vector<T>::const_iterator ity=s.second.begin();ity!=s.second.end();ity++)
-            os << *ity << ", ";
-        os << "]";
 
-        return os;
-    }
 
+}
+
+template<typename U>
+std::ostream& operator<<(std::ostream& os,const typename core::ShapeBuilder<U>::Shape& s)
+{
+    os << "[";
+    for(typename std::vector<U>::const_iterator itx=s.first.begin();itx!=s.first.end();itx++)
+        os << *itx << ", ";
+    os << "]" << std::endl << "[";
+    for(typename std::vector<U>::const_iterator ity=s.second.begin();ity!=s.second.end();ity++)
+        os << *ity << ", ";
+    os << "]";
+
+    return os;
 }
 
 #endif // SHAPEBUILDER_H
