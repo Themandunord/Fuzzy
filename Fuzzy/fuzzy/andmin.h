@@ -19,7 +19,6 @@ namespace fuzzy{
 
     template<class T>
     AndMin<T>::~AndMin(){
-
     }
 
     template<class T>

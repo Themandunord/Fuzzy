@@ -12,6 +12,7 @@ namespace core {
         BinaryShadowExpression(const BinaryExpression<T>* e = NULL);
         virtual ~BinaryShadowExpression(){}
         virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
+        virtual void setBinaryExpression(const BinaryExpression<T>* e);
       private:
         const BinaryExpression<T>* m_exp;
     };
@@ -28,6 +29,11 @@ namespace core {
         if(m_exp == NULL)
             throw NullExpressionException("Null operand expression !");
         return m_exp->evaluate(l,r);
+    }
+
+    template<class T>
+    void BinaryShadowExpression<T>::setBinaryExpression(const BinaryExpression<T>* e){
+        m_exp=e;
     }
 
 
