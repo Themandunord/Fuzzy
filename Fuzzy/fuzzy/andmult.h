@@ -26,8 +26,7 @@ namespace fuzzy{
     T AndMult<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const{
         T vl = l->evaluate();
         T vr = r->evaluate();
-        T mult =  vl + vr;
-        return (mult < 1)?mult:1;
+        return vl*vr;
     }
 }
 
