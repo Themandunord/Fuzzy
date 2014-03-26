@@ -34,7 +34,10 @@ namespace fuzzy{
             it_first++;
             it_second++;
         }
-        return _num / _den;
+        if(_den != 0)
+            return _num / _den;
+
+        return 0;
     }
 }
 
