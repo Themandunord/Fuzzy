@@ -23,6 +23,8 @@ namespace core
         ShapeBuilder(){}
         ShapeBuilder(const ShapeBuilder&);
         void operator=(const ShapeBuilder&);
+
+        typedef std::pair<std::vector<T>, std::vector<T> > Shape;
     };
 
     template<class T>
@@ -33,7 +35,7 @@ namespace core
     }
 
     template<class T>
-    std::pair<std::vector<T>, std::vector<T> > const& ShapeBuilder::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step) const
+    Shape const& ShapeBuilder::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step) const
     {
         std::vector<T> x;
         std::vector<T> y;
@@ -45,9 +47,11 @@ namespace core
             y.push_back(e->evaluate());
         }
 
-        std::pair<std::vector<T>, std::vector<T> > pair(x,y);
+        Shape pair(x,y);
         return pair;
     }
+
+
 
 }
 
