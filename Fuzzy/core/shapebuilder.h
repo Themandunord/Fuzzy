@@ -2,6 +2,7 @@
 #define SHAPEBUILDER_H
 
 #include <vector>
+#include <iostream>
 #include "expression.h"
 #include "valuemodel.h"
 
@@ -12,19 +13,19 @@ namespace core
     {
 
     public:
+        typedef std::pair<std::vector<T>, std::vector<T> > Shape;
+
         virtual ~ShapeBuilder(){}
         static ShapeBuilder<T> &getInstance();
-        std::pair<std::vector<T>, std::vector<T> > const& buildShape(ValueModel<T>* vm, Expression<T>* e,T min, T max, T step) const;
-
+        Shape& buildShape(ValueModel<T>* vm, Expression<T>* e,T min, T max, T step) const;
+        Shape& getShape() const;
 
     private:
-        std::pair<std::vector<T>,std::vector<T> > shape;
+        Shape* m_shape;
 
-        ShapeBuilder(){}
+        ShapeBuilder():m_shape(NULL){}
         ShapeBuilder(const ShapeBuilder&);
         void operator=(const ShapeBuilder&);
-
-        typedef std::pair<std::vector<T>, std::vector<T> > Shape;
     };
 
     template<class T>
@@ -35,7 +36,7 @@ namespace core
     }
 
     template<class T>
-    Shape const& ShapeBuilder::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step) const
+    Shape& ShapeBuilder<T>::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step) const
     {
         std::vector<T> x;
         std::vector<T> y;
@@ -48,10 +49,30 @@ namespace core
         }
 
         Shape pair(x,y);
+        m_shape=&pair;
         return pair;
     }
 
+    template<class T>
+    Shape& ShapeBuilder<T>::getShape() const
+    {
+        if(m_shape == NULL) throw "Null Shape !";
+        return *m_shape;
+    }
 
+    template<class T>
+    std::ostream& operator<<(std::ostream& os, const ShapeBuilder::Shape& s)
+    {
+        os << "[";
+        for(typename std::vector<T>::const_iterator itx=s.first.begin();itx!=s.first.end();itx++)
+            os << *itx << ", ";
+        os << "]" << std::endl << "[";
+        for(typename std::vector<T>::const_iterator ity=s.second.begin();ity!=s.second.end();ity++)
+            os << *ity << ", ";
+        os << "]";
+
+        return os;
+    }
 
 }
 
