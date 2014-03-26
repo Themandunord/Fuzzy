@@ -35,6 +35,12 @@ namespace fuzzy{
         core::Expression<T>* newNot(core::Expression<T>* o);
         core::Expression<T>* newIs(Is<T>* s,core::Expression<T>* o);
 
+        void setAnd(const And<T>& _and);
+        void setOr(const Or<T>& _or);
+        void setThen(const Then<T>& _then);
+        void setAgg(const Agg<T>& _agg);
+        void setNot(const Not<T>& _not);
+
     protected:
         core::BinaryShadowExpression<T>* m_and;
         core::BinaryShadowExpression<T>* m_or;
@@ -99,6 +105,32 @@ namespace fuzzy{
     core::Expression<T>* FuzzyFactory<T>::newIs(Is<T>* is, core::Expression<T>* o)
     {
         return this->newUnary(is,o);
+    }
+
+    template<class T>
+    void FuzzyFactory::setAnd(const And<T> &_and)
+    {
+        m_and->setBinaryExpression(&_and);
+    }
+
+    void FuzzyFactory::setOr(const Or<T> &_or)
+    {
+        m_or->setBinaryExpression(&_or);
+    }
+
+    void FuzzyFactory::setThen(const Then<T> &_then)
+    {
+        m_then->setBinaryExpression(&_then);
+    }
+
+    void FuzzyFactory::setAgg(const Agg<T> &_agg)
+    {
+        m_agg->setBinaryExpression(&_agg);
+    }
+
+    void FuzzyFactory::setNot(const Not<T> &_not)
+    {
+        m_not->setUnaryExpression(&_not);
     }
 
 }

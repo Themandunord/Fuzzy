@@ -12,7 +12,7 @@ namespace core {
         UnaryShadowExpression(const UnaryExpression<T>* e = NULL);
         virtual ~UnaryShadowExpression(){}
         virtual T evaluate(Expression<T>* o) const;
-        virtual void setExpression(const UnaryExpression<T>* e);
+        virtual void setUnaryExpression(const UnaryExpression<T>* e);
       private:
         const UnaryExpression<T>* m_exp;
     };
@@ -32,7 +32,7 @@ namespace core {
     }
 
     template<class T>
-    void UnaryShadowExpression<T>::setExpression(const UnaryExpression<T>* e){
+    void UnaryShadowExpression<T>::setUnaryExpression(const UnaryExpression<T>* e){
         m_exp = e;
     }
 
