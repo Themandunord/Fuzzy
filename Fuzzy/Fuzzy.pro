@@ -40,5 +40,7 @@ HEADERS += \
     core/expressionfactory.h \
     fuzzy/fuzzyfactory.h \
     core/unaryshadowexpression.h \
-    core/binaryshadowexpression.h
+    core/binaryshadowexpression.h \
+    fuzzy/mamdanidefuzz.h \
+    fuzzy/cogdefuzz.h
 
