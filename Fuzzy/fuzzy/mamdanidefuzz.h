@@ -28,7 +28,7 @@ namespace fuzzy {
 
     template<class T>
     T MamdaniDefuzz<T>::evaluate(core::Expression<T>* l, core::Expression<T>* r) const{
-            return defuzz(core::ShapeView<T>::getInstance().setParam((core::ValueModel<T>*)l,(core::UnaryExpression<T>*)r,m_min,m_max,m_step).getShape());
+            return defuzz(core::ShapeView<T>::getInstance().setParam((core::ValueModel<T>*)l,r,m_min,m_max,m_step).getShape());
     }
 
 

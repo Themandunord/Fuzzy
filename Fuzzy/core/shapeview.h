@@ -21,15 +21,15 @@ namespace core {
         virtual void print();
         virtual void run();
 
-        virtual ShapeView<T>& setParam(ValueModel<T>* v,UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
+        virtual ShapeView<T>& setParam(ValueModel<T>* v,Expression<T>* e, const T& _min, const T& _max, const T& _step);
 
         static ShapeView<T>& getInstance();
 
     private:
-        ShapeView(ValueModel<T>* v = NULL ,UnaryExpression<T>* e = NULL, const T& _min = 0, const T& _max = 0, const T& _step = 0);
+        ShapeView(ValueModel<T>* v = NULL ,Expression<T>* e = NULL, const T& _min = 0, const T& _max = 0, const T& _step = 0);
 
         ValueModel<T>* m_value;
-        UnaryExpressionModel<T>* m_model;
+        Expression<T>* m_exp;
         std::vector<T> *m_x, *m_y;
         std::pair<std::vector<T>*,std::vector<T>* >* m_content;
         T m_min, m_max, m_step;
@@ -47,9 +47,8 @@ namespace core {
     }
 
     template<class T>
-    ShapeView<T>::ShapeView(ValueModel<T>* v, UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step)
-        : m_value(v), m_model(new UnaryExpressionModel<T>(m_value,e)),
-          m_x(new std::vector<T>()),m_y(new std::vector<T>()),
+    ShapeView<T>::ShapeView(ValueModel<T>* v, Expression<T>* e, const T& _min, const T& _max, const T& _step)
+        : m_value(v), m_exp(e),m_x(new std::vector<T>()),m_y(new std::vector<T>()),
           m_content(new std::pair<std::vector<T>*,std::vector<T>* >(m_x,m_y)),
           m_min(_min), m_max(_max), m_step(_step)
     {
@@ -61,8 +60,6 @@ namespace core {
         delete m_content;
         delete m_x;
         delete m_y;
-        delete m_model;
-
     }
 
     template<class T>
@@ -86,7 +83,7 @@ namespace core {
         for(float i = m_min; i <= m_max; i+=m_step){
             addFirst(i);
             m_value->setValue(i);
-            T result = m_model->evaluate();
+            T result = m_exp->evaluate();
             addSecond(result);
         }
         m_value->setValue(v);
@@ -102,18 +99,17 @@ namespace core {
     }
 
     template<class T>
-    ShapeView<T>& ShapeView<T>::setParam(ValueModel<T>* v,UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step){
+    ShapeView<T>& ShapeView<T>::setParam(ValueModel<T>* v,Expression<T>* e, const T& _min, const T& _max, const T& _step){
         m_min = _min;
         m_max = _max;
         m_step = _step;
 
-        delete m_model;
         delete m_x;
         delete m_y;
         delete m_content;
 
         m_value = v;
-        m_model = new UnaryExpressionModel<T>(m_value,e);
+        m_exp = e;
         m_x = new std::vector<T>();
         m_y = new std::vector<T>();
         m_content = new std::pair<std::vector<T>*,std::vector<T>* >(m_x,m_y);
