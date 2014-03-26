@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    core/nullexpressionexception.cpp
+    core/nullexpressionexception.cpp \
+    main2.cpp
 
 HEADERS += \
     core/expression.h \
