@@ -89,29 +89,29 @@ int main()
     /*ShapeView*/
     cout << "ShapeView : Triangle" << endl;
     fuzzy::IsTriangle<float> itView(0,5,10);
-    //core::ShapeView<float> sv;
-    core::ShapeView<float>::getInstance().setParam(&itView,0,10,1).run();
+    core::ValueModel<float> vmView(1);
+    core::ShapeView<float>::getInstance().setParam(&vmView,&itView,0,10,1).run();
 
     cout << "ShapeView : Trapeze" << endl;
     fuzzy::IsTrapeze<float> itzView(0,3,6,10);
-    core::ShapeView<float>::getInstance().setParam(&itzView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,&itzView,0,10,1).run();
 
 
     cout << "ShapeView : TrapezeLeft" << endl;
     fuzzy::IsTrapezeLeft<float> itzlView(5,10);
-    core::ShapeView<float>::getInstance().setParam(&itzlView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,&itzlView,0,10,1).run();
 
     cout << "ShapeView : TrapezeRight" << endl;
     fuzzy::IsTrapezeRight<float> itzrView(0,5);
-    core::ShapeView<float>::getInstance().setParam(&itzrView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,&itzrView,0,10,1).run();
 
     cout << "ShapeView : Gaussian" << endl;
     fuzzy::IsGaussian<float> igView(5,1);
-    core::ShapeView<float>::getInstance().setParam(&igView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,&igView,0,10,1).run();
 
     cout << "ShapeView : Bell" << endl;
     fuzzy::IsBell<float> ibView(2,4,6);
-    core::ShapeView<float>::getInstance().setParam(&ibView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,&ibView,0,10,1).run();
 
     /* Text NullExpressionException */
     core::BinaryExpressionModel<float> bem9(NULL,&vmr,&agp);
