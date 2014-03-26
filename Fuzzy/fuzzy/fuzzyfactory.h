@@ -17,6 +17,7 @@
 #include "notminus1.h"
 #include "is.h"
 #include "istriangle.h"
+#include "mamdanidefuzz.h"
 
 
 
@@ -25,7 +26,7 @@ namespace fuzzy{
     class FuzzyFactory : public core::ExpressionFactory<T>
     {
     public:
-        FuzzyFactory(const And<T> &_and, const Or<T> &_or, const Then<T> &_then, const Agg<T> &_agg, const Not<T> &_not);
+        FuzzyFactory(const And<T> &_and, const Or<T> &_or, const Then<T> &_then, const Agg<T> &_agg, const Not<T> &_not, const MamdaniDefuzz<T> &_mamdani);
         virtual ~FuzzyFactory();
 
         core::Expression<T>* newAnd(core::Expression<T>* l,core::Expression<T>* r);
@@ -34,29 +35,32 @@ namespace fuzzy{
         core::Expression<T>* newAgg(core::Expression<T>* l,core::Expression<T>* r);
         core::Expression<T>* newNot(core::Expression<T>* o);
         core::Expression<T>* newIs(Is<T>* s,core::Expression<T>* o);
+        core::Expression<T>* newMamdani(core::Expression<T>* l,core::Expression<T>* r);
 
         void changeAnd(const And<T>& _and);
         void changeOr(const Or<T>& _or);
         void changeThen(const Then<T>& _then);
         void changeAgg(const Agg<T>& _agg);
         void changeNot(const Not<T>& _not);
+        void changeMamdani(const MamdaniDefuzz<T>& _mamdani);
 
     protected:
         core::BinaryShadowExpression<T> m_and;
         core::BinaryShadowExpression<T> m_or;
         core::BinaryShadowExpression<T> m_then;
         core::BinaryShadowExpression<T> m_agg;
-        //Defuzz m_defuzz;
+        core::BinaryShadowExpression<T> m_mamdani;
         core::UnaryShadowExpression<T> m_not;
     };
 
     template< class T >
-    FuzzyFactory<T>::FuzzyFactory(const And<T>& _and, const Or<T>& _or, const Then<T>& _then, const Agg<T>& _agg, const Not<T>& _not)
+    FuzzyFactory<T>::FuzzyFactory(const And<T>& _and, const Or<T>& _or, const Then<T>& _then, const Agg<T>& _agg, const Not<T>& _not, const MamdaniDefuzz<T>& _mamdani)
         : m_and(&_and),
           m_or(&_or),
           m_then(&_then),
           m_agg(&_agg),
-          m_not(&_not)
+          m_not(&_not),
+          m_mamdani(&_mamdani)
     {
 
     }
@@ -102,6 +106,12 @@ namespace fuzzy{
         return this->newUnary(is,o);
     }
 
+    template< class T >
+    core::Expression<T>* FuzzyFactory<T>::newMamdani(core::Expression<T>* l,core::Expression<T>* r)
+    {
+        return this->newBinary(&m_mamdani,l,r);
+    }
+
     template<class T>
     void FuzzyFactory<T>::changeAnd(const And<T> &_and)
     {
@@ -132,6 +142,11 @@ namespace fuzzy{
         m_not.setUnaryExpression(&_not);
     }
 
+    template<class T>
+    void FuzzyFactory<T>::changeMamdani(const MamdaniDefuzz<T> &_mamdani)
+    {
+        m_mamdani.setBinaryExpression(&_mamdani);
+    }
 }
 
 

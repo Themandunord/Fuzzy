@@ -6,6 +6,7 @@
 #include "fuzzy/aggmax.h"
 #include "fuzzy/fuzzyfactory.h"
 #include "fuzzy/istriangle.h"
+#include "fuzzy/cogdefuzz.h"
 #include "core/valuemodel.h"
 #include "core/expression.h"
 
@@ -19,8 +20,9 @@ int main2(){
     fuzzy::OrMax<float> opOr;
     fuzzy::ThenMin<float> opThen;
     fuzzy::AggMax<float> opAgg;
+    fuzzy::CogDefuzz<float> opCog(0,10,1);
 
-    fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot);
+    fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot,opCog);
 
     fuzzy::IsTriangle<float> poor(-5,0,5);
     fuzzy::IsTriangle<float> good(0,5,10);
