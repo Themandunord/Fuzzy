@@ -26,7 +26,7 @@ namespace fuzzy{
     T AndMin<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const{
         T vl = l->evaluate();
         T vr = r->evaluate();
-        return (vl<vr)?vl:vl;
+        return (vl<vr)?vl:vr;
     }
 }
 
