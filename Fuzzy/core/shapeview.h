@@ -92,12 +92,11 @@ namespace core {
         m_min = _min;
         m_max = _max;
         m_step = _step;
-        if(m_model != NULL){
-            delete m_model;
-            delete m_x;
-            delete m_y;
-            delete m_content;
-        }
+
+        delete m_model;
+        delete m_x;
+        delete m_y;
+        delete m_content;
 
         m_model = new UnaryExpressionModel<T>(m_value,e);
         m_x = new std::vector<T>();
