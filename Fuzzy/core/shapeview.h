@@ -13,7 +13,7 @@ namespace core {
         ShapeView(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
         virtual ~ShapeView();
 
-        virtual std::pair<std::vector<T>*,std::vector<T>* >* getPair() const;
+        virtual std::pair<std::vector<T>*,std::vector<T>* >* getShape() const;
 
         virtual void addFirst(const T);
         virtual void addSecond(const T);
@@ -22,7 +22,7 @@ namespace core {
         virtual void print();
         virtual void run();
 
-        virtual void setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
+        virtual ShapeView<T>& setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
     private:
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
@@ -34,7 +34,7 @@ namespace core {
     };
 
     template<class T>
-    ShapeView<T>::ShapeView(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step)
+    ShapeView<T>::ShapeView(UnaryExpression<T>* e = NULL, const T& _min = 0, const T& _max = 0, const T& _step = 0)
         : m_value(new ValueModel<T>(_min)), m_model(new UnaryExpressionModel<T>(m_value,e)),
           m_x(new std::vector<T>()),m_y(new std::vector<T>()),
           m_content(new std::pair<std::vector<T>*,std::vector<T>* >(m_x,m_y)),
@@ -54,7 +54,7 @@ namespace core {
     }
 
     template<class T>
-    std::pair<std::vector<T>*,std::vector<T>* >* ShapeView<T>::getPair() const{
+    std::pair<std::vector<T>*,std::vector<T>* >* ShapeView<T>::getShape() const{
         return m_content;
     }
 
@@ -88,18 +88,23 @@ namespace core {
     }
 
     template<class T>
-    void ShapeView<T>::setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step){
+    ShapeView<T>& ShapeView<T>::setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step){
         m_min = _min;
         m_max = _max;
         m_step = _step;
-        delete m_model;
-        delete m_x;
-        delete m_y;
-        delete m_content;
+        if(m_model != NULL){
+            delete m_model;
+            delete m_x;
+            delete m_y;
+            delete m_content;
+        }
+
         m_model = new UnaryExpressionModel<T>(m_value,e);
         m_x = new std::vector<T>();
         m_y = new std::vector<T>();
         m_content = new std::pair<std::vector<T>*,std::vector<T>* >(m_x,m_y);
+
+        return *this;
     }
 
     template<class T>
