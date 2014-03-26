@@ -9,9 +9,11 @@ namespace fuzzy {
     template<class T>
     class MamdaniDefuzz : public core::BinaryExpression<T>{
     public:
-        virtual T evaluate(core::Expression<T>* l, core::Expession<T>* r) const;
+        virtual T evaluate(core::Expression<T>* l, core::Expression<T>* r) const;
         virtual T defuzz(std::pair<std::vector<T>*,std::vector<T>* >*) const = 0;
     };
+
+
 
 }
 
