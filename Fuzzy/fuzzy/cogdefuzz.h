@@ -2,6 +2,7 @@
 #define COGDEFUZZ_H
 
 #include "mamdanidefuzz.h"
+#include <iostream>
 
 namespace fuzzy{
     template<class T>
@@ -28,12 +29,11 @@ namespace fuzzy{
         typename std::vector<T>::const_iterator it_second = shape->second->begin();
 
         for(int i = 0; it_first != shape->first->end(); i++){
-            _num += *it_first + *it_second;
+            _num += (*it_first) * (*it_second);
             _den += *it_second;
             it_first++;
             it_second++;
         }
-
         return _num / _den;
     }
 }

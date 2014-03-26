@@ -15,12 +15,13 @@
 #include "fuzzy/aggmax.h"
 #include "fuzzy/aggplus.h"
 #include "fuzzy/fuzzyfactory.h"
+#include "fuzzy/cogdefuzz.h"
 #include "core/unaryexpressionmodel.h"
 #include "core/binaryexpressionmodel.h"
 #include "core/shapeview.h"
-#include "core/expressionfactory.h"
 
-#include "fuzzy/cogdefuzz.h"
+
+
 
 using namespace std;
 
@@ -89,7 +90,8 @@ int main()
     cout << "AggPlus : " << bem8.evaluate() << endl;
 
     /*ShapeView*/
-    fuzzy::FuzzyFactory<float> f(am,om,tm,agm,nm1);
+    fuzzy::CogDefuzz<float> cd(0,10,1);
+    fuzzy::FuzzyFactory<float> f(am,om,tm,agm,nm1,cd);
 
     cout << "ShapeView : Triangle" << endl;
     fuzzy::IsTriangle<float> itView(0,5,10);
@@ -143,15 +145,14 @@ int main()
     core::ExpressionFactory<float> efactory;
     cout << efactory.newUnary(&ibView,&vm)->evaluate() << endl;
 
-    fuzzy::FuzzyFactory<float> fFactory(am,om,tm,agm,nm1);
+    fuzzy::FuzzyFactory<float> fFactory(am,om,tm,agm,nm1,cd);
     cout << "AndMin via factory : " << fFactory.newAnd(&vml,&vmr)->evaluate() << endl;
     cout << "OrMax via factory : " << fFactory.newOr(&vml,&vmr)->evaluate() << endl;
     cout << "ThenMin via factory : " << fFactory.newThen(&vml,&vmr)->evaluate() << endl;
     cout << "AggMax via factory : " << fFactory.newAgg(&vml,&vmr)->evaluate() << endl;
     cout << "NotMinus1 via factory : " << fFactory.newNot(&vm)->evaluate() << endl;
     cout << "IsTriangle via factory : " << fFactory.newIs(&it,&vm)->evaluate() << endl;
-
-    fuzzy::CogDefuzz<float> cdd(0,10,1);
+    cout << "CogDefuzz via factory : " << fFactory.newMamdani(&vml,fFactory.newIs(&it,&vmr))->evaluate() << endl;
 
     return 0;
 }

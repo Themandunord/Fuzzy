@@ -17,9 +17,9 @@ namespace core {
         virtual void addFirst(const T);
         virtual void addSecond(const T);
 
-        virtual void process();
-        virtual void print();
-        virtual void run();
+        virtual ShapeView<T>& process();
+        virtual ShapeView<T>& print();
+        virtual ShapeView<T>& run();
 
         virtual ShapeView<T>& setParam(ValueModel<T>* v,Expression<T>* e, const T& _min, const T& _max, const T& _step);
 
@@ -78,7 +78,7 @@ namespace core {
     }
 
     template<class T>
-    void ShapeView<T>::process(){
+    ShapeView<T>& ShapeView<T>::process(){
         T v = m_value->evaluate();
         for(float i = m_min; i <= m_max; i+=m_step){
             addFirst(i);
@@ -87,15 +87,19 @@ namespace core {
             addSecond(result);
         }
         m_value->setValue(v);
+
+        return *this;
     }
 
     template<class T>
-    void ShapeView<T>::print(){
+    ShapeView<T>& ShapeView<T>::print(){
         typename std::vector<T>::iterator itSecond = m_content->second->begin();
         for(typename std::vector<T>::iterator itFirst = m_content->first->begin(); itFirst != m_content->first->end(); ++itFirst){
             std::cout << "[ " << *itFirst << ", " << *itSecond << " ]" << std::endl;
             ++itSecond;
         }
+
+        return *this;
     }
 
     template<class T>
@@ -118,9 +122,11 @@ namespace core {
     }
 
     template<class T>
-    void ShapeView<T>::run(){
+    ShapeView<T>& ShapeView<T>::run(){
         process();
         print();
+
+        return *this;
     }
 }
 
