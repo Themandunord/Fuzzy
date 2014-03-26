@@ -1,19 +1,21 @@
 #ifndef COGDEFUZZ_H
 #define COGDEFUZZ_H
 
-#include "../core/binaryexpression.h"
+#include "mamdanidefuzz.h"
 
 namespace fuzzy{
     template<class T>
-    class CogDefuzz : public core::BinaryExpression<T>{
+    class CogDefuzz : public MamdaniDefuzz<T>{
     public:
-        CogDefuzz();
+        CogDefuzz(const T& _min, const T& _max, const T& _step);
         virtual ~CogDefuzz(){}
         virtual T evaluate(core::Expression<T>* l,core::Expression<T>* r) const;
+        virtual T defuzz(std::pair<std::vector<T>*,std::vector<T>* >*) const;
     };
 
     template<class T>
-    CogDefuzz<T>::CogDefuzz()
+    CogDefuzz<T>::CogDefuzz(const T& _min, const T& _max, const T& _step)
+        : MamdaniDefuzz<T>(_min,_max,_step)
     {
 
     }
@@ -21,9 +23,13 @@ namespace fuzzy{
     template<class T>
     T evaluate(core::Expression<T>* l, core::Expression<T>* r) const
     {
-
+        MamdaniDefuzz<T>::evaluate(l,r);
     }
 
+    template<class T>
+    T Codefuzz<T>::defuzz(std::pair<std::vector<T>*,std::vector<T>* >*) const{
+
+    }
 }
 
 #endif // COGDEFUZZ_H
