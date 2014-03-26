@@ -113,21 +113,25 @@ namespace fuzzy{
         m_and->setBinaryExpression(&_and);
     }
 
+    template<class T>
     void FuzzyFactory::setOr(const Or<T> &_or)
     {
         m_or->setBinaryExpression(&_or);
     }
 
+    template<class T>
     void FuzzyFactory::setThen(const Then<T> &_then)
     {
         m_then->setBinaryExpression(&_then);
     }
 
+    template<class T>
     void FuzzyFactory::setAgg(const Agg<T> &_agg)
     {
         m_agg->setBinaryExpression(&_agg);
     }
 
+    template<class T>
     void FuzzyFactory::setNot(const Not<T> &_not)
     {
         m_not->setUnaryExpression(&_not);
