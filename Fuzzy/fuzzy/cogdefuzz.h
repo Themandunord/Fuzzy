@@ -22,8 +22,8 @@ namespace fuzzy{
 
     template<class T>
     T CogDefuzz<T>::defuzz(std::pair<std::vector<T>*,std::vector<T>* >* shape) const{
-        T _num;
-        T _den;
+        T _num = 0;
+        T _den = 0;
 
         typename std::vector<T>::const_iterator it_first = shape->first->begin();
         typename std::vector<T>::const_iterator it_second = shape->second->begin();
@@ -34,10 +34,10 @@ namespace fuzzy{
             it_first++;
             it_second++;
         }
-        if(_den != 0)
-            return _num / _den;
 
-        return 0;
+        if(_den == 0) return 0;
+
+        return _num/_den;
     }
 }
 
