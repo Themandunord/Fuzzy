@@ -2,6 +2,8 @@
 #define SHAPEBUILDER_H
 
 #include <vector>
+#include "expression.h"
+#include "valuemodel.h"
 
 namespace core
 {
@@ -12,6 +14,8 @@ namespace core
     public:
         virtual ~ShapeBuilder(){}
         static ShapeBuilder<T> &getInstance();
+        std::pair<std::vector<T>, std::vector<T> > const& buildShape(ValueModel<T>* vm, Expression<T>* e,T min, T max, T step) const;
+
 
     private:
         std::pair<std::vector<T>,std::vector<T> > shape;
@@ -27,6 +31,24 @@ namespace core
         static ShapeBuilder instance;
         return instance;
     }
+
+    template<class T>
+    std::pair<std::vector<T>, std::vector<T> > const& ShapeBuilder::buildShape(ValueModel<T>* vm,Expression<T> *e, const T& min, const T& max, const T& step) const
+    {
+        std::vector<T> x;
+        std::vector<T> y;
+
+        for (T i=min;i<max;i+=step)
+        {
+            x.push_back(i);
+            vm->setValue(i);
+            y.push_back(e->evaluate());
+        }
+
+        std::pair<std::vector<T>, std::vector<T> > pair(x,y);
+        return pair;
+    }
+
 }
 
 #endif // SHAPEBUILDER_H
