@@ -61,25 +61,21 @@ namespace core
         return *m_shape;
     }
 
+    template<typename U>
+    std::ostream& operator<<(std::ostream& os,const std::pair<std::vector<U>, std::vector<U> >& s)
+    {
+        typename std::vector<U>::const_iterator ity=s.second.begin();
+        for(typename std::vector<U>::const_iterator itx=s.first.begin(); itx!=s.first.end(); itx++)
+        {
+            os << "[" << *itx << ", " << *ity << "]" << std::endl;
+            ity++;
+        }
+        return os;
+    }
 }
 
-template<typename U>
-std::ostream& operator<<(std::ostream& os,const std::pair<std::vector<U>, std::vector<U> >& s)
-{
-    os << "[";
-    for(typename std::vector<U>::const_iterator itx=s.first.begin(); itx!=s.first.end(); itx++)
-    {
-        os << *itx << ", ";
-    }
-    os << "]" << std::endl << "[";
 
-    for(typename std::vector<U>::const_iterator ity=s.second.begin();ity!=s.second.end();ity++)
-    {
-        os << *ity << ", ";
-    }
-    os << "]";
 
-    return os;
-}
+
 
 #endif // SHAPEBUILDER_H

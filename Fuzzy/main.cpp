@@ -154,8 +154,8 @@ int main()
     cout << "NotMinus1 via factory : " << fFactory.newNot(&vm)->evaluate() << endl;
     cout << "IsTriangle via factory : " << fFactory.newIs(&it,&vm)->evaluate() << endl;
     cout << "CogDefuzz via factory : " << fFactory.newMamdani(&vml,fFactory.newIs(&it,&vmr))->evaluate() << endl;
-
-    cout << "Triangle via buildShape : " << core::ShapeBuilder<float>::getInstance().buildShape(&vmView,f.newIs(&itView,&vmView),0,10,1) << endl;
+    using core::operator<<;
+    cout << "Triangle via buildShape : " << std::endl << core::ShapeBuilder<float>::getInstance().buildShape(&vmView,f.newIs(&itView,&vmView),0,10,1) << endl;
 
     return 0;
 }
