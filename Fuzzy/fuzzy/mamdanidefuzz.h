@@ -1,11 +1,14 @@
 #ifndef MAMDANIDEFUZZ_H
 #define MAMDANIDEFUZZ_H
 
+#include "../core/binaryexpression.h"
+
 namespace fuzzy {
     template<class T>
-    class MamdaniDefuzz{
+    class MamdaniDefuzz : public core::BinaryExpression<T>{
     public:
-        virtual T evaluate(core::Expression<T>* o) const = 0;
+        virtual T evaluate(core::Expression<T>* l, core::Expession<T>* r) const = 0;
+
     };
 
 }

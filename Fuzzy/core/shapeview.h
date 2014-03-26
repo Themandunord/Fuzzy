@@ -22,7 +22,7 @@ namespace core {
         virtual void print();
         virtual void run();
 
-        virtual ShapeView<T>& setParam(UnaryExpression<T>* e, const T& _min, const T& _max, const T& _step);
+        virtual ShapeView<T>& setParam(UnaryExpression<T>* e = NULL, const T& _min = 0, const T& _max = 0, const T& _step = 0);
     private:
         ValueModel<T>* m_value;
         UnaryExpressionModel<T>* m_model;
