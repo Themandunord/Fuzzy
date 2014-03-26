@@ -89,31 +89,33 @@ int main()
     cout << "AggPlus : " << bem8.evaluate() << endl;
 
     /*ShapeView*/
-   /* cout << "ShapeView : Triangle" << endl;
+    fuzzy::FuzzyFactory<float> f(am,om,tm,agm,nm1);
+
+    cout << "ShapeView : Triangle" << endl;
     fuzzy::IsTriangle<float> itView(0,5,10);
     core::ValueModel<float> vmView(1);
-    core::ShapeView<float>::getInstance().setParam(&vmView,(core::Expression<float>*)&itView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,f.newIs(&itView,&vmView),0,10,1).run();
 
     cout << "ShapeView : Trapeze" << endl;
     fuzzy::IsTrapeze<float> itzView(0,3,6,10);
-    core::ShapeView<float>::getInstance().setParam(&vmView,(core::Expression<float>*)&itzView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,f.newIs(&itzView,&vmView),0,10,1).run();
 
 
     cout << "ShapeView : TrapezeLeft" << endl;
     fuzzy::IsTrapezeLeft<float> itzlView(5,10);
-    core::ShapeView<float>::getInstance().setParam(&vmView,(core::Expression<float>*)&itzlView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,f.newIs(&itzlView,&vmView),0,10,1).run();
 
     cout << "ShapeView : TrapezeRight" << endl;
     fuzzy::IsTrapezeRight<float> itzrView(0,5);
-    core::ShapeView<float>::getInstance().setParam(&vmView,(core::Expression<float>*)&itzrView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,f.newIs(&itzrView,&vmView),0,10,1).run();
 
     cout << "ShapeView : Gaussian" << endl;
     fuzzy::IsGaussian<float> igView(5,1);
-    core::ShapeView<float>::getInstance().setParam(&vmView,(core::Expression<float>*)&igView,0,10,1).run();
-*/
-    //cout << "ShapeView : Bell" << endl;
+    core::ShapeView<float>::getInstance().setParam(&vmView,f.newIs(&igView,&vmView),0,10,1).run();
+
+    cout << "ShapeView : Bell" << endl;
     fuzzy::IsBell<float> ibView(2,4,6);
-    //core::ShapeView<float>::getInstance().setParam(&vmView,(core::Expression<float>*)&ibView,0,10,1).run();
+    core::ShapeView<float>::getInstance().setParam(&vmView,f.newIs(&ibView,&vmView),0,10,1).run();
 
 
 
