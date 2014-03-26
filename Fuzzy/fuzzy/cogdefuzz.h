@@ -9,7 +9,6 @@ namespace fuzzy{
     public:
         CogDefuzz(const T& _min, const T& _max, const T& _step);
         virtual ~CogDefuzz(){}
-        virtual T evaluate(core::Expression<T>* l,core::Expression<T>* r) const;
         virtual T defuzz(std::pair<std::vector<T>*,std::vector<T>* >*) const;
     };
 
@@ -18,12 +17,6 @@ namespace fuzzy{
         : MamdaniDefuzz<T>(_min,_max,_step)
     {
 
-    }
-
-    template<class T>
-    T evaluate(core::Expression<T>* l, core::Expression<T>* r) const
-    {
-        MamdaniDefuzz<T>::evaluate(l,r);
     }
 
     template<class T>

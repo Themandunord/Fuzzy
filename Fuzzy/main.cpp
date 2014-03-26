@@ -20,6 +20,8 @@
 #include "core/shapeview.h"
 #include "core/expressionfactory.h"
 
+#include "fuzzy/cogdefuzz.h"
+
 using namespace std;
 
 int main()
@@ -144,6 +146,8 @@ int main()
     cout << "AggMax via factory : " << fFactory.newAgg(&vml,&vmr)->evaluate() << endl;
     cout << "NotMinus1 via factory : " << fFactory.newNot(&vm)->evaluate() << endl;
     cout << "IsTriangle via factory : " << fFactory.newIs(&it,&vm)->evaluate() << endl;
+
+    fuzzy::CogDefuzz<float> cdd(0,10,1);
 
     return 0;
 }

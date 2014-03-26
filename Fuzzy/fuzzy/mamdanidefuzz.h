@@ -2,6 +2,7 @@
 #define MAMDANIDEFUZZ_H
 
 #include "../core/binaryexpression.h"
+#include "../core/expression.h"
 #include "../core/shapeview.h"
 #include <iostream>
 #include <vector>
@@ -12,7 +13,7 @@ namespace fuzzy {
     public:
         MamdaniDefuzz(const T& _min, const T& _max, const T& _step);
         virtual ~MamdaniDefuzz(){}
-        virtual T evaluate(core::Expression<T>* l, core::Expession<T>* r) const;
+        virtual T evaluate(core::Expression<T>* l, core::Expression<T>* r) const;
         virtual T defuzz(std::pair<std::vector<T>*,std::vector<T>* >*) const = 0;
     private:
         T m_min, m_max, m_step;
@@ -26,8 +27,8 @@ namespace fuzzy {
     }
 
     template<class T>
-    MamdaniDefuzz<T>::evaluate(core::Expression<T>* l, core::Expession<T>* r){
-        return defuzz(core::ShapeView<T>::getInstance().setParam(l,r,m_min,m_max,m_step).getShape());
+    T MamdaniDefuzz<T>::evaluate(core::Expression<T>* l, core::Expression<T>* r) const{
+            return defuzz(core::ShapeView<T>::getInstance().setParam((core::ValueModel<T>*)l,(core::UnaryExpression<T>*)r,m_min,m_max,m_step).getShape());
     }
 
 
