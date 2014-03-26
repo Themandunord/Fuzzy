@@ -56,6 +56,9 @@ int main2(){
 
     cout << r->evaluate() << endl;
 
+    cout << "CogDefuzz via factory : " << f.newMamdani(&tips,r)->evaluate() << endl;
+
+
     return 0;
 }
 
