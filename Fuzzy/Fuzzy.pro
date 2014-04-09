@@ -45,5 +45,6 @@ HEADERS += \
     fuzzy/cogdefuzz.h \
     core/shapebuilder.h \
     core/naryexpression.h \
-    fuzzy/sugenodefuzz.h
+    fuzzy/sugenodefuzz.h \
+    fuzzy/sugenothen.h
 
