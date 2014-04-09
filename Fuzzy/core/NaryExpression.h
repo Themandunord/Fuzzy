@@ -6,10 +6,10 @@
 namespace core
 {
     template<class T>
-    class NaryExpression : public Expression
+    class NaryExpression : public Expression<T>
     {
     public:
-        virtual ~NaryExpression();
+        virtual ~NaryExpression(){}
         virtual T evaluate(std::vector<Expression<T>*> operands) const = 0;
 
     };
