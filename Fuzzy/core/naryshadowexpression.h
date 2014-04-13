@@ -10,7 +10,6 @@ namespace core {
     class NaryShadowExpression : public NaryExpression<T>{
       public:
         NaryShadowExpression(const NaryExpression<T>* e = NULL);
-        virtual ~NaryShadowExpression(){}
         virtual T evaluate(std::vector<Expression<T>*>* ) const;
         virtual void setNaryExpression(const NaryExpression<T>* e);
       private:
