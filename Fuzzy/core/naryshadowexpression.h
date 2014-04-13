@@ -11,7 +11,7 @@ namespace core {
       public:
         NaryShadowExpression(const NaryExpression<T>* e = NULL);
         virtual ~NaryShadowExpression(){}
-        virtual T evaluate(std::vector<Expression<T>*> ) const;
+        virtual T evaluate(std::vector<Expression<T>*>* ) const;
         virtual void setNaryExpression(const NaryExpression<T>* e);
       private:
         const NaryExpression<T>* m_exp;
@@ -25,7 +25,7 @@ namespace core {
     }
 
     template<class T>
-    T NaryShadowExpression<T>::evaluate(std::vector<Expression<T>*> _operands) const{
+    T NaryShadowExpression<T>::evaluate(std::vector<Expression<T>*>* _operands) const{
         if(m_exp == NULL)
             throw NullExpressionException("Null operand expression !");
         return m_exp->evaluate(_operands);
