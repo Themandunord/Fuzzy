@@ -2,6 +2,10 @@
 #define SUGENODEFUZZ_H
 
 #include "../core/naryexpression.h"
+#include "../core/binaryexpressionmodel.h"
+#include "../core/binaryshadowexpression.h"
+#include "sugenothen.h"
+
 
 namespace fuzzy {
     template<class T>
@@ -9,8 +13,7 @@ namespace fuzzy {
     public:
         SuganoDefuzz(const T& _min, const T& _max, const T& _step);
         virtual ~SugenoDefuzz(){}
-        virtual T evaluate(std::vector<core::Expression<T>*> operands) const;
-        virtual T defuzz(std::pair<std::vector<T>*,std::vector<T>* >*) const = 0;
+        virtual T evaluate(std::vector<core::Expression<T>*>* operands) const;
     private:
         T m_min, m_max, m_step;
     };
@@ -23,9 +26,16 @@ namespace fuzzy {
     }
 
     template<class T>
-    T SugenoDefuzz<T>::evaluate(std::vector<core::Expression<T>*> operands) const
+    T SugenoDefuzz<T>::evaluate(std::vector<core::Expression<T>*>* operands) const
     {
-        std::iterator it = operands.begin();
+        T w;
+        typename std::vector<core::Expression<T>*>::iterator it;
+        for(it=operands->begin();it!=operands->end();it++)
+        {
+            BinaryExpressionModel<T>* bem = (BinaryExpressionModel<T>*)*it;
+            w = st->premiseValue();
+
+        }
 
     }
 
