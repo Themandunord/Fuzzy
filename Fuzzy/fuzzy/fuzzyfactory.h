@@ -5,6 +5,7 @@
 #include "../core/expression.h"
 #include "../core/unaryshadowexpression.h"
 #include "../core/binaryshadowexpression.h"
+#include "../core/NaryExpression.h"
 #include "and.h"
 #include "andmin.h"
 #include "or.h"
@@ -18,6 +19,8 @@
 #include "is.h"
 #include "istriangle.h"
 #include "mamdanidefuzz.h"
+#include "sugenoconclusion.h"
+#include "sugenodefuzz.h"
 
 
 
@@ -26,7 +29,7 @@ namespace fuzzy{
     class FuzzyFactory : public core::ExpressionFactory<T>
     {
     public:
-        FuzzyFactory(const And<T> &_and, const Or<T> &_or, const Then<T> &_then, const Agg<T> &_agg, const Not<T> &_not, const MamdaniDefuzz<T> &_mamdani);
+        FuzzyFactory(const And<T> &_and, const Or<T> &_or, const Then<T> &_then, const Agg<T> &_agg, const Not<T> &_not, const MamdaniDefuzz<T> &_mamdani, const SugenoDefuzz<T> &_sugeno, const SugenoConclusion<T> &_conclusion);
         virtual ~FuzzyFactory();
 
         core::Expression<T>* newAnd(core::Expression<T>* l,core::Expression<T>* r);
@@ -50,17 +53,23 @@ namespace fuzzy{
         core::BinaryShadowExpression<T> m_then;
         core::BinaryShadowExpression<T> m_agg;
         core::BinaryShadowExpression<T> m_mamdani;
+        core::NaryShadowExpression<T> m_sugeno;
+        core::NaryShadowExpression<T> m_conclusion;
         core::UnaryShadowExpression<T> m_not;
     };
 
     template< class T >
-    FuzzyFactory<T>::FuzzyFactory(const And<T>& _and, const Or<T>& _or, const Then<T>& _then, const Agg<T>& _agg, const Not<T>& _not, const MamdaniDefuzz<T>& _mamdani)
+    FuzzyFactory<T>::FuzzyFactory(const And<T>& _and, const Or<T>& _or, const Then<T>& _then, const Agg<T>& _agg, const Not<T>& _not, const MamdaniDefuzz<T>& _mamdani,
+                                  const SugenoDefuzz<T>& _sugeno,
+                                  const SugenoConclusion<T>& _conclusion)
         : m_and(&_and),
           m_or(&_or),
           m_then(&_then),
           m_agg(&_agg),
           m_not(&_not),
-          m_mamdani(&_mamdani)
+          m_mamdani(&_mamdani),
+          m_sugeno(&_sugeno),
+          m_conclusion(&_conclusion)
     {
 
     }
