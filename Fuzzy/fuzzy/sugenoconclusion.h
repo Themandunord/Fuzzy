@@ -2,6 +2,7 @@
 #define SUGENOCONCLUSION_H
 
 #include "../core/naryexpression.h"
+#include "../core/binaryexpressionmodel.h"
 
 namespace core {
 
@@ -22,12 +23,12 @@ namespace core {
     }
 
     template<class T>
-    T SugenoConclusion<T>::evaluate(std::vector<Expression<core::T> *> *operands) const
+    T SugenoConclusion<T>::evaluate(std::vector<core::Expression<T> *> *operands) const
     {
-        std::vector<Expression<core::T> *>::iterator itOpe = operands->begin();
-        std::vector<T>::iterator itCoeff = m_coeff.begin();
+        typename std::vector<core::Expression<T> *>::iterator itOpe = operands->begin();
+        typename std::vector<T>::iterator itCoeff = m_coeff.begin();
 
-        T result = 0;
+        T result;
 
         while(itOpe != operands->end() && itCoeff != m_coeff.end())
         {
