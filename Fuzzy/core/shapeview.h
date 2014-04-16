@@ -124,7 +124,7 @@ namespace core {
     template<class T>
     ShapeView<T>& ShapeView<T>::run(){
         process();
-        print();
+        //print();
 
         return *this;
     }

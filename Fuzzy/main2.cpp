@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int main2(){
+int main(){
 
     fuzzy::NotMinus1<float> opNot;
     fuzzy::AndMin<float> opAnd;
@@ -56,8 +56,16 @@ int main2(){
 
     cout << r->evaluate() << endl;
     service.setValue(2);
-    cout << "CogDefuzz via factory : " << f.newMamdani(&tips,r)->evaluate() << endl;
+    core::Expression<float> *system = f.newMamdani(&tips,r);
+    //cout << "CogDefuzz via factory : " << f.newMamdani(&tips,r)->evaluate() << endl;
 
+    float s;
+    while(true)
+    {
+      cout << "service : ";cin >> s;
+      service.setValue(s);
+      cout << "tips -> " << system->evaluate() << endl;
+    }
 
     return 0;
 }
