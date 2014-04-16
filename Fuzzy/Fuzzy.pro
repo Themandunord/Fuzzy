@@ -48,5 +48,6 @@ HEADERS += \
     fuzzy/sugenodefuzz.h \
     fuzzy/sugenothen.h \
     core/naryshadowexpression.h \
-    core/naryexpressionmodel.h
+    core/naryexpressionmodel.h \
+    fuzzy/sugenoconclusion.h
 
