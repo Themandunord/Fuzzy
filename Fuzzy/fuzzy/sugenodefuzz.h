@@ -14,13 +14,10 @@ namespace fuzzy {
         SuganoDefuzz(const T& _min, const T& _max, const T& _step);
         virtual ~SugenoDefuzz(){}
         virtual T evaluate(std::vector<core::Expression<T>*>* operands) const;
-    private:
-        T m_min, m_max, m_step;
     };
 
     template<class T>
-    SugenoDefuzz<T>::SugenoDefuzz(const T& _min, const T& _max, const T& _step)
-        : m_min(_min), m_max(_max), m_step(_step)
+    SugenoDefuzz<T>::SugenoDefuzz()
     {
 
     }
