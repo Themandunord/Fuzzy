@@ -3,8 +3,9 @@
 
 #include "../core/naryexpression.h"
 #include "../core/binaryexpressionmodel.h"
+#include "../core/nullexpressionexception.h"
 
-namespace core {
+namespace fuzzy {
 
     template<class T>
     class SugenoConclusion : public NaryExpression<T>{
@@ -30,12 +31,17 @@ namespace core {
 
         T result = 0;
 
+        if(operands->size() + 1 != m_coeff.size())
+            throw new core::NullExpressionException("Operands and Coeff Size Error");
+
         while(itOpe != operands->end() && itCoeff != m_coeff.end())
         {
             result += (*itCoeff) * (*itOpe->evaluate());
             itCoeff++;
             itOpe++;
         }
+
+        result += m_coeff[m_coeff.size() - 1];
 
         return result;
     }

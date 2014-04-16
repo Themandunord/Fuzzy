@@ -7,6 +7,9 @@
 #include "fuzzy/fuzzyfactory.h"
 #include "fuzzy/istriangle.h"
 #include "fuzzy/cogdefuzz.h"
+#include "fuzzy/sugenoconclusion.h"
+#include "fuzzy/sugenodefuzz.h"
+#include "fuzzy/sugenothen.h"
 #include "core/valuemodel.h"
 #include "core/expression.h"
 
@@ -22,7 +25,16 @@ int main(){
     fuzzy::AggMax<float> opAgg;
     fuzzy::CogDefuzz<float> opCog(0,25,1);
 
-    fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot,opCog);
+    std::vector<T> coeff;
+    coeff.push_back(1.0f);
+    coeff.push_back(1.0f);
+    coeff.push_back(1.0f);
+
+    fuzzy::SugenoConclusion<float> sugConcl(coeff);
+    fuzzy::SugenoDefuzz<float> sugDefuzz;
+
+
+    fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot,opCog,sugDefuzz,sugConcl);
 
     fuzzy::IsTriangle<float> poor(-5,0,5);
     fuzzy::IsTriangle<float> good(0,5,10);
@@ -68,6 +80,17 @@ int main(){
       cout << "tips -> " << system->evaluate() << endl;
       cpt++;
     }
+
+    fuzzy::SugenoThen<float> sugThen;
+    f.changeThen(sugThen);
+
+
+
+    core::Expression<float>* expression = null;
+
+
+
+
 
 
 
