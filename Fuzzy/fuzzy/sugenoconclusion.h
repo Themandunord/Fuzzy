@@ -28,7 +28,7 @@ namespace core {
         typename std::vector<core::Expression<T> *>::iterator itOpe = operands->begin();
         typename std::vector<T>::iterator itCoeff = m_coeff.begin();
 
-        T result;
+        T result = 0;
 
         while(itOpe != operands->end() && itCoeff != m_coeff.end())
         {
