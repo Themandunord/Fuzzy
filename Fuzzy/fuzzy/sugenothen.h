@@ -28,8 +28,8 @@ namespace fuzzy
         T _l = l->evaluate();
         T _r = r->evaluate();
         T _mult = _l * _r;
-        premiseValue = (_mult < 1)?_mult:1;
-        return premiseValue();
+        premiseValue = _l;
+        return (_mult < 1)?_mult:1;
     }
 
     template<class T>
