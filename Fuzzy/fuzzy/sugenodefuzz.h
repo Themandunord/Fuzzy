@@ -25,6 +25,7 @@ namespace fuzzy {
     template<class T>
     T SugenoDefuzz<T>::evaluate(std::vector<core::Expression<T>*> operands) const
     {
+        std::iterator it = operands.begin();
 
     }
 
