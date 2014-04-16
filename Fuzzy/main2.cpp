@@ -60,12 +60,16 @@ int main(){
     //cout << "CogDefuzz via factory : " << f.newMamdani(&tips,r)->evaluate() << endl;
 
     float s;
-    while(true)
+    int cpt = 0;
+    while(cpt == 2)
     {
       cout << "service : ";cin >> s;
       service.setValue(s);
       cout << "tips -> " << system->evaluate() << endl;
+      cpt++;
     }
+
+
 
     return 0;
 }
