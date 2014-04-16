@@ -6,6 +6,8 @@
 #include "binaryexpression.h"
 #include "binaryexpressionmodel.h"
 #include "unaryexpressionmodel.h"
+#include "naryexpression.h"
+#include "naryexpressionmodel.h"
 #include <vector>
 
 namespace core {
@@ -18,6 +20,7 @@ namespace core {
         virtual Expression<T>* hold(Expression<T>*);
         virtual Expression<T>* newUnary(UnaryExpression<T>*, Expression<T>*);
         virtual Expression<T>* newBinary(BinaryExpression<T>*, Expression<T>*, Expression<T>*);
+        virtual Expression<T>* newNary(NaryExpression<T>*, std::vector<Expression<T>* >);
     private:
         std::vector<Expression<T>* >* memory;
     };
@@ -49,6 +52,11 @@ namespace core {
     template<class T>
     Expression<T>* ExpressionFactory<T>::newBinary(BinaryExpression<T>* ope, Expression<T>* l, Expression<T>* r){
         return hold(new BinaryExpressionModel<T>(l,r,ope));
+    }
+
+    template<class T>
+    Expression<T>* ExpressionFactory<T>::newNary(NaryExpression<T>* ope, std::vector<Expression<T>* > o){
+        return hold(new NaryExpressionModel<T>(&o,ope));
     }
 }
 
