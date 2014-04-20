@@ -36,8 +36,7 @@ namespace core {
 
     template<class T>
     NaryExpressionModel<T>::~NaryExpressionModel(){
-        for(typename std::vector<Expression<T>*>::iterator it = m_operands->begin(); it != m_operands->end(); ++it)
-            delete *it;
+
     }
 
     template<class T>

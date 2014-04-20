@@ -30,7 +30,7 @@ namespace fuzzy {
         typename std::vector<core::Expression<T>*>::iterator it;
         for(it=operands->begin();it!=operands->end();it++)
         {
-            core::BinaryExpressionModel<T>* bem = (core::BinaryExpressionModel<T>*)*it;
+            core::BinaryExpressionModel<T>* bem = (core::BinaryExpressionModel<T>*) (*it);
             core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->getOperator();
             SugenoThen<T>* st = (SugenoThen<T>*) bse->getBinaryExpression();
             wz += bem->evaluate();

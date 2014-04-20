@@ -28,7 +28,6 @@ int main(){
     std::vector<float> coeff;
     coeff.push_back(1.0f);
     coeff.push_back(1.0f);
-    coeff.push_back(1.0f);
 
     fuzzy::SugenoConclusion<float> sugConcl(coeff);
     fuzzy::SugenoDefuzz<float> sugDefuzz;
@@ -73,13 +72,13 @@ int main(){
 
     float s;
     int cpt = 0;
-    while(cpt != 2)
+    /*while(cpt != 2)
     {
       cout << "service : ";cin >> s;
       service.setValue(s);
       cout << "tips -> " << system->evaluate() << endl;
       cpt++;
-    }
+    }*/
 
     fuzzy::SugenoThen<float> sugThen;
     f.changeThen(sugThen);
@@ -117,9 +116,11 @@ int main(){
                     f.newSugenoConclusion(sugenoConcServiceFood)
                 )
             );
+
+
     core::Expression<float>* sugeno =  f.newSugenoDefuzz(sRules);
 
-   // cout << "Sugeno : " << sugeno->evaluate();
+    cout << "Sugeno : " << sugeno->evaluate();
 
 
 
