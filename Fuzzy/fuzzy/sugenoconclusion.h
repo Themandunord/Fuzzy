@@ -31,9 +31,9 @@ namespace fuzzy {
 
         T result = 0;
 
-        if(operands->size() + 1 != m_coeff.size())
+        /*if(operands->size() + 1 != m_coeff.size())
             throw new core::NullExpressionException("Operands and Coeff Size Error");
-
+        */
         while(itOpe != operands->end() && itCoeff != m_coeff.end())
         {
             result += (*itCoeff) * (*itOpe)->evaluate();

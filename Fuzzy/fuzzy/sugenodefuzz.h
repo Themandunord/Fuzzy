@@ -5,6 +5,9 @@
 #include "../core/binaryexpressionmodel.h"
 #include "../core/binaryshadowexpression.h"
 #include "sugenothen.h"
+#include "ormax.h"
+
+#include <iostream>
 
 
 namespace fuzzy {
@@ -27,14 +30,16 @@ namespace fuzzy {
     {
         T w=0;
         T wz=0;
-        typename std::vector<core::Expression<T>*>::iterator it;
+        typename std::vector<core::Expression<T>*>::const_iterator it;
         for(it=operands->begin();it!=operands->end();it++)
         {
             core::BinaryExpressionModel<T>* bem = (core::BinaryExpressionModel<T>*) (*it);
             core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->getOperator();
             SugenoThen<T>* st = (SugenoThen<T>*) bse->getBinaryExpression();
             wz += bem->evaluate();
+            std::cout <<"Bem evaluate :"<< wz << std::endl;
             w += st->premiseValue();
+            std::cout <<"premise :"<< w << std::endl;
         }
         return wz/w;
     }
