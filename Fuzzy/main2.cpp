@@ -25,7 +25,7 @@ int main(){
     fuzzy::AggMax<float> opAgg;
     fuzzy::CogDefuzz<float> opCog(0,25,1);
 
-    std::vector<T> coeff;
+    std::vector<float> coeff;
     coeff.push_back(1.0f);
     coeff.push_back(1.0f);
     coeff.push_back(1.0f);
@@ -73,7 +73,7 @@ int main(){
 
     float s;
     int cpt = 0;
-    while(cpt == 2)
+    while(cpt != 2)
     {
       cout << "service : ";cin >> s;
       service.setValue(s);
@@ -84,11 +84,42 @@ int main(){
     fuzzy::SugenoThen<float> sugThen;
     f.changeThen(sugThen);
 
+    vector<core::Expression<float>*> sugenoConcServiceFood;
+            sugenoConcServiceFood.push_back(&service);
+            sugenoConcServiceFood.push_back(&food);
 
+            vector<core::Expression<float>*> sugenoConcService;
+            sugenoConcService.push_back(&service);
 
-    core::Expression<float>* expression = null;
+            //Sugeno system (use nary)
+            vector<core::Expression<float>*> sRules;
+            sRules.push_back(
+                f.newThen(
+                    f.newOr(
+                        f.newIs(&poor,&service),
+                        f.newIs(&cheap,&tips)
+                    ),
+                    f.newSugenoConclusion(sugenoConcServiceFood)
+                )
+            );
+            sRules.push_back(
+                f.newThen(
+                    f.newIs(&good,&service),
+                    f.newSugenoConclusion(sugenoConcService)
+                )
+            );
+            sRules.push_back(
+                f.newThen(
+                    f.newOr(
+                        f.newIs(&excellent,&service),
+                        f.newIs(&generous,&food)
+                    ),
+                    f.newSugenoConclusion(sugenoConcServiceFood)
+                )
+            );
+    core::Expression<float>* sugeno =  f.newSugenoDefuzz(sRules);
 
-
+   // cout << "Sugeno : " << sugeno->evaluate();
 
 
 

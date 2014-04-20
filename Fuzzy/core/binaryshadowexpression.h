@@ -13,7 +13,7 @@ namespace core {
         virtual ~BinaryShadowExpression(){}
         virtual T evaluate(Expression<T>* l, Expression<T>* r) const;
         virtual void setBinaryExpression(const BinaryExpression<T>* e);
-        virtual BinaryExpression<T>* getBinaryExpression() const;
+        virtual const BinaryExpression<T>* getBinaryExpression() const;
       private:
         const BinaryExpression<T>* m_exp;
     };
@@ -38,7 +38,7 @@ namespace core {
     }
 
     template<class T>
-    BinaryExpression<T>* BinaryShadowExpression<T>::getBinaryExpression() const{
+    const BinaryExpression<T>* BinaryShadowExpression<T>::getBinaryExpression() const{
         return m_exp;
     }
 

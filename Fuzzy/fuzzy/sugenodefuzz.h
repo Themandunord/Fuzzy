@@ -11,7 +11,7 @@ namespace fuzzy {
     template<class T>
     class SugenoDefuzz : public core::NaryExpression<T>{
     public:
-        SuganoDefuzz(const T& _min, const T& _max, const T& _step);
+        SugenoDefuzz();
         virtual ~SugenoDefuzz(){}
         virtual T evaluate(std::vector<core::Expression<T>*>* operands) const;
     };
@@ -31,7 +31,7 @@ namespace fuzzy {
         for(it=operands->begin();it!=operands->end();it++)
         {
             core::BinaryExpressionModel<T>* bem = (core::BinaryExpressionModel<T>*)*it;
-            core::BinaryShadowExpression<T>* bse = bem->getOperator();
+            core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->getOperator();
             SugenoThen<T>* st = (SugenoThen<T>*) bse->getBinaryExpression();
             wz += bem->evaluate();
             w += st->premiseValue();

@@ -5,7 +5,7 @@
 #include "../core/expression.h"
 #include "../core/unaryshadowexpression.h"
 #include "../core/binaryshadowexpression.h"
-#include "../core/NaryExpression.h"
+#include "../core/naryshadowexpression.h"
 #include "and.h"
 #include "andmin.h"
 #include "or.h"
@@ -39,6 +39,8 @@ namespace fuzzy{
         core::Expression<T>* newNot(core::Expression<T>* o);
         core::Expression<T>* newIs(Is<T>* s,core::Expression<T>* o);
         core::Expression<T>* newMamdani(core::Expression<T>* l,core::Expression<T>* r);
+        core::Expression<T>* newSugenoDefuzz(std::vector<core::Expression<T>*>& operands);
+        core::Expression<T>* newSugenoConclusion(std::vector<core::Expression<T>*>& operands);
 
         void changeAnd(const And<T>& _and);
         void changeOr(const Or<T>& _or);
@@ -46,6 +48,8 @@ namespace fuzzy{
         void changeAgg(const Agg<T>& _agg);
         void changeNot(const Not<T>& _not);
         void changeMamdani(const MamdaniDefuzz<T>& _mamdani);
+        void changeSugenoDefuzz(const SugenoDefuzz<T>& _sugeno);
+        void changeSugenoConclusion(const SugenoConclusion<T>& _sugeno);
 
     protected:
         core::BinaryShadowExpression<T> m_and;
@@ -122,6 +126,17 @@ namespace fuzzy{
     }
 
     template<class T>
+    core::Expression<T>* FuzzyFactory<T>::newSugenoDefuzz(std::vector<core::Expression<T>*>& operands){
+        return this->newNary(&m_sugeno,operands);
+    }
+
+    template<class T>
+    core::Expression<T>* FuzzyFactory<T>::newSugenoConclusion(std::vector<core::Expression<T>*>& operands)
+    {
+        return this->newNary(&m_conclusion,operands);
+    }
+
+    template<class T>
     void FuzzyFactory<T>::changeAnd(const And<T> &_and)
     {
         m_and.setBinaryExpression(&_and);
@@ -156,7 +171,19 @@ namespace fuzzy{
     {
         m_mamdani.setBinaryExpression(&_mamdani);
     }
-}
+
+    template<class T>
+    void FuzzyFactory<T>::changeSugenoDefuzz(const SugenoDefuzz<T> &_sugeno)
+    {
+        m_sugeno.setNaryExpression(&_sugeno);
+    }
+
+    template<class T>
+    void FuzzyFactory<T>::changeSugenoConclusion(const SugenoConclusion<T> &_sugeno)
+    {
+        m_conclusion.setNaryExpression(&_sugeno);
+    }
+ }
 
 
 
