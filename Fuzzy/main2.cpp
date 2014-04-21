@@ -6,6 +6,9 @@
 #include "fuzzy/aggmax.h"
 #include "fuzzy/fuzzyfactory.h"
 #include "fuzzy/istriangle.h"
+#include "fuzzy/isgaussian.h"
+#include "fuzzy/istrapezeleft.h"
+#include "fuzzy/istrapezeright.h"
 #include "fuzzy/cogdefuzz.h"
 #include "fuzzy/sugenoconclusion.h"
 #include "fuzzy/sugenodefuzz.h"
@@ -19,19 +22,127 @@
 
 using namespace std;
 
-int main(){
-
+void sugenoTest(){
     fuzzy::NotMinus1<float> opNot;
     fuzzy::AndMin<float> opAnd;
     fuzzy::OrMax<float> opOr;
     fuzzy::ThenMin<float> opThen;
     fuzzy::AggMax<float> opAgg;
-    fuzzy::CogDefuzz<float> opCog(0,25,1);
+    fuzzy::CogDefuzz<float> opCog(0,25,0.1);
 
     std::vector<float> coeff;
     coeff.push_back(1.6f);
     coeff.push_back(2.1f);
-    coeff.push_back(1.0f);
+    coeff.push_back(1.1f);
+
+    fuzzy::SugenoConclusion<float> sugConcl(coeff);
+    fuzzy::SugenoDefuzz<float> sugDefuzz;
+
+
+    fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot,opCog,sugDefuzz,sugConcl);
+
+    fuzzy::IsGaussian<float> poor(0,6);
+    fuzzy::IsGaussian<float> good(5, 6);
+    fuzzy::IsGaussian<float> excellent(10, 6);
+
+    fuzzy::IsTrapezeLeft<float> rancid(1, 4);
+    fuzzy::IsTrapezeRight<float> delicious(6, 9);
+
+    fuzzy::IsTriangle<float> cheap(0, 6, 12);
+    fuzzy::IsTriangle<float> average(7, 13, 19);
+    fuzzy::IsTriangle<float> generous(14, 20, 26);
+
+    core::ValueModel<float> service(0);
+    core::ValueModel<float> food(0);
+    core::ValueModel<float> tips(0);
+
+
+    service.setValue(3);
+    food.setValue(8);
+
+    core::Expression<float> *r =
+        f.newAgg(
+            f.newAgg(
+                f.newThen(
+                    f.newOr(
+                        f.newIs(&poor, &service),
+                        f.newIs(&rancid, &food)
+                    ),
+                    f.newIs(&cheap,&tips)
+                ),
+                f.newThen(
+                    f.newIs(&good,&service),
+                    f.newIs(&average,&tips)
+                )
+            ),
+            f.newThen(
+                f.newOr(
+                    f.newIs(&excellent, &service),
+                    f.newIs(&delicious, &food)
+                ),
+                f.newIs(&generous,&tips)
+            )
+    );
+
+    core::Expression<float> *system = f.newMamdani(&tips,r);
+
+    cout << "Mandani tips -> " << system->evaluate() << endl;
+
+    fuzzy::SugenoThen<float> sugThen;
+    f.changeThen(sugThen);
+
+
+    vector<core::Expression<float>*> sugenoConcServiceFood;
+    sugenoConcServiceFood.push_back(&service);
+    sugenoConcServiceFood.push_back(&food);
+
+    vector<core::Expression<float>*> sugenoConcService;
+    sugenoConcService.push_back(&service);
+
+    vector<core::Expression<float>*> sRules;
+    sRules.push_back(
+        f.newThen(
+            f.newOr(
+                f.newIs(&poor,&service),
+                f.newIs(&rancid,&food)
+            ),
+            f.newSugenoConclusion(sugenoConcServiceFood)
+        )
+    );
+    sRules.push_back(
+        f.newThen(
+            f.newIs(&good,&service),
+            f.newSugenoConclusion(sugenoConcService)
+        )
+    );
+    sRules.push_back(
+        f.newThen(
+            f.newOr(
+                f.newIs(&excellent,&service),
+                f.newIs(&delicious,&food)
+            ),
+            f.newSugenoConclusion(sugenoConcServiceFood)
+        )
+    );
+
+
+    core::Expression<float>* sugeno =  f.newSugenoDefuzz(sRules);
+
+    cout << "Sugeno tips -> " << sugeno->evaluate() << endl;
+}
+
+void mandaniTest(){
+    fuzzy::NotMinus1<float> opNot;
+    fuzzy::AndMin<float> opAnd;
+    fuzzy::OrMax<float> opOr;
+    fuzzy::ThenMin<float> opThen;
+    fuzzy::AggMax<float> opAgg;
+    fuzzy::CogDefuzz<float> opCog(0,25,0.1);
+
+    std::vector<float> coeff;
+    coeff.push_back(1.6f);
+    coeff.push_back(2.1f);
+    coeff.push_back(1.1f);
 
     fuzzy::SugenoConclusion<float> sugConcl(coeff);
     fuzzy::SugenoDefuzz<float> sugDefuzz;
@@ -51,6 +162,7 @@ int main(){
     core::ValueModel<float> food(0);
     core::ValueModel<float> tips(0);
 
+
     core::Expression<float> *r =
      f.newAgg(
       f.newAgg(
@@ -69,10 +181,9 @@ int main(){
     )
      );
 
-    cout << r->evaluate() << endl;
-    service.setValue(2);
     core::Expression<float> *system = f.newMamdani(&tips,r);
-    //cout << "CogDefuzz via factory : " << f.newMamdani(&tips,r)->evaluate() << endl;
+
+    //cout << "Mandani tips -> " << system->evaluate() << endl;
 
     float s;
     int cpt = 0;
@@ -80,57 +191,15 @@ int main(){
     {
       cout << "service : ";cin >> s;
       service.setValue(s);
-      cout << "tips -> " << system->evaluate() << endl;
+      cout << "Mandani tips -> " << system->evaluate() << endl;
       cpt++;
     }
+}
 
-    fuzzy::SugenoThen<float> sugThen;
-    f.changeThen(sugThen);
+int main(){
 
-    service.setValue(10);
-    food.setValue(10);
-    vector<core::Expression<float>*> sugenoConcServiceFood;
-    sugenoConcServiceFood.push_back(&service);
-    sugenoConcServiceFood.push_back(&food);
-
-    vector<core::Expression<float>*> sugenoConcService;
-    sugenoConcService.push_back(&service);
-
-    vector<core::Expression<float>*> sRules;
-    sRules.push_back(
-        f.newThen(
-            f.newOr(
-                f.newIs(&poor,&service),
-                f.newIs(&cheap,&food)
-            ),
-            f.newSugenoConclusion(sugenoConcServiceFood)
-        )
-    );
-    sRules.push_back(
-        f.newThen(
-            f.newIs(&good,&service),
-            f.newSugenoConclusion(sugenoConcService)
-        )
-    );
-    sRules.push_back(
-        f.newThen(
-            f.newOr(
-                f.newIs(&excellent,&service),
-                f.newIs(&generous,&food)
-            ),
-            f.newSugenoConclusion(sugenoConcServiceFood)
-        )
-    );
-
-
-    core::Expression<float>* sugeno =  f.newSugenoDefuzz(sRules);
-
-    core::Expression<float>* sugenoC =  f.newSugenoConclusion(sugenoConcServiceFood);
-    cout << "Sugeno tips C: " << sugenoC->evaluate() << endl;
-    core::Expression<float>* sugenoC2 =  f.newSugenoConclusion(sugenoConcService);
-    cout << "Sugeno tips C: " << sugenoC2->evaluate() << endl;
-
-    cout << "Sugeno tips N: " << sugeno->evaluate() << endl;
+    sugenoTest();
+    //mandaniTest();
 
     return 0;
 }

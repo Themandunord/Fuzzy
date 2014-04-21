@@ -37,9 +37,9 @@ namespace fuzzy {
             core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->getOperator();
             SugenoThen<T>* st = (SugenoThen<T>*) bse->getBinaryExpression();
             wz += bem->evaluate();
-            std::cout <<"Bem evaluate :"<< wz << std::endl;
+            //std::cout <<"Bem evaluate :"<< wz << std::endl;
             w += st->premiseValue();
-            std::cout <<"premise :"<< w << std::endl;
+            //std::cout <<"premise :"<< w << std::endl;
         }
         return wz/w;
     }
