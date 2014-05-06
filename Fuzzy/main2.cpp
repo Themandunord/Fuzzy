@@ -32,8 +32,8 @@ void sugenoTest(){
 
     std::vector<float> coeff;
     coeff.push_back(1.6f);
-    coeff.push_back(2.1f);
-    coeff.push_back(1.1f);
+    coeff.push_back(1.7f);
+    coeff.push_back(1.7f);
 
     fuzzy::SugenoConclusion<float> sugConcl(coeff);
     fuzzy::SugenoDefuzz<float> sugDefuzz;
@@ -41,16 +41,16 @@ void sugenoTest(){
 
     fuzzy::FuzzyFactory<float> f(opAnd,opOr,opThen,opAgg,opNot,opCog,sugDefuzz,sugConcl);
 
-    fuzzy::IsGaussian<float> poor(0,6);
-    fuzzy::IsGaussian<float> good(5, 6);
-    fuzzy::IsGaussian<float> excellent(10, 6);
+    fuzzy::IsGaussian<float> poor(0,1.25);
+    fuzzy::IsGaussian<float> good(5,1.25);
+    fuzzy::IsGaussian<float> excellent(10, 1.25);
 
     fuzzy::IsTrapezeLeft<float> rancid(1, 4);
     fuzzy::IsTrapezeRight<float> delicious(6, 9);
 
-    fuzzy::IsTriangle<float> cheap(0, 6, 12);
-    fuzzy::IsTriangle<float> average(7, 13, 19);
-    fuzzy::IsTriangle<float> generous(14, 20, 26);
+    fuzzy::IsTriangle<float> cheap(0, 5, 12);
+    fuzzy::IsTriangle<float> average(6, 14, 20);
+    fuzzy::IsTriangle<float> generous(14, 20, 25);
 
     core::ValueModel<float> service(0);
     core::ValueModel<float> food(0);
@@ -92,12 +92,12 @@ void sugenoTest(){
     f.changeThen(sugThen);
 
 
-    vector<core::Expression<float>*> sugenoConcServiceFood;
-    sugenoConcServiceFood.push_back(&service);
-    sugenoConcServiceFood.push_back(&food);
+    vector<core::Expression<float>*> sugenoConclSF;
+    sugenoConclSF.push_back(&service);
+    sugenoConclSF.push_back(&food);
 
-    vector<core::Expression<float>*> sugenoConcService;
-    sugenoConcService.push_back(&service);
+    vector<core::Expression<float>*> sugenoConclS;
+    sugenoConclS.push_back(&service);
 
     vector<core::Expression<float>*> sRules;
     sRules.push_back(
@@ -106,13 +106,13 @@ void sugenoTest(){
                 f.newIs(&poor,&service),
                 f.newIs(&rancid,&food)
             ),
-            f.newSugenoConclusion(sugenoConcServiceFood)
+            f.newSugenoConclusion(sugenoConclSF)
         )
     );
     sRules.push_back(
         f.newThen(
             f.newIs(&good,&service),
-            f.newSugenoConclusion(sugenoConcService)
+            f.newSugenoConclusion(sugenoConclS)
         )
     );
     sRules.push_back(
@@ -121,7 +121,7 @@ void sugenoTest(){
                 f.newIs(&excellent,&service),
                 f.newIs(&delicious,&food)
             ),
-            f.newSugenoConclusion(sugenoConcServiceFood)
+            f.newSugenoConclusion(sugenoConclSF)
         )
     );
 
@@ -183,8 +183,6 @@ void mandaniTest(){
 
     core::Expression<float> *system = f.newMamdani(&tips,r);
 
-    //cout << "Mandani tips -> " << system->evaluate() << endl;
-
     float s;
     int cpt = 0;
     while(cpt != 1)
@@ -199,7 +197,7 @@ void mandaniTest(){
 int main(){
 
     sugenoTest();
-    //mandaniTest();
+   // mandaniTest();
 
     return 0;
 }
